@@ -35,6 +35,18 @@ public class Draw {
     protected static boolean texLoaded;
     private static Texture[] tex = new Texture[1];
     
+    /**
+     * 
+     * @param x
+     * @param y
+     * @param sx
+     * @param sy
+     * @param texx
+     * @param texy
+     * @param texsx
+     * @param texsy 
+     * @param texID Use 0 for Pacman, 1 for ghosts
+     */
     public static void rect(float x, float y, float sx, float sy, int texx, int texy, int texsx, int texsy, int texID) {
         glPushMatrix();
         {

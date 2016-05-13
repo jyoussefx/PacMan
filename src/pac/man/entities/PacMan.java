@@ -19,6 +19,10 @@ public class PacMan extends Entity{
         sy = 16;
     }
 
+    public void getInput(){
+        
+    }
+    
     /* (non-Javadoc)
      * @see pac.man.entities.Entity#update()
      */
