@@ -10,10 +10,10 @@ package pac.man.entities;
  * @version 0.0.1.0
  */
 public abstract class Entity {
-    protected int x;
-    protected int y;
-    protected int sx;
-    protected int sy;
+    protected float x;
+    protected float y;
+    protected float sx;
+    protected float sy;
     protected Type id;
     
     public enum Type{
@@ -26,4 +26,17 @@ public abstract class Entity {
         return id;
     }
     
+    public float getX() {
+        return x;
+    }
+    public float getY() {
+        return y;
+    }
+    public float getSx() {
+        return sx;
+    }
+    public float getSy() {
+        return sy;
+    }
+
 }
