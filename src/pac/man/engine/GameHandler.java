@@ -23,6 +23,7 @@ public class GameHandler {
     public static Game game;
 
     public GameHandler(){
+        Draw.loadTextures();
         pac = new PacMan(16,16);
     }
     

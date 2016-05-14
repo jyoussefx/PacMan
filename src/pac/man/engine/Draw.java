@@ -32,29 +32,52 @@ import org.newdawn.slick.opengl.TextureLoader;
  */
 public class Draw {
     
-    protected static boolean texLoaded;
     private static Texture[] tex = new Texture[1];
     
     /**
+     * Draws a sprite on the screen from the specified image
      * 
-     * @param x
-     * @param y
-     * @param sx
-     * @param sy
-     * @param texx
-     * @param texy
-     * @param texsx
-     * @param texsy 
+     * @param x the X position on the screen, starting from the left
+     * @param y the Y position on the screen, starting from the <i>bottom</i>
+     * @param sx the width
+     * @param sy the height
+     * @param texx X position on the picture, starting from the left
+     * @param texy Y position on the picture, starting from the <i>top<i/>
+     * @param texsx end X position on the picture, starting from the left
+     * @param texsy end Y position on the picture, starting from the <i>top<i/>
      * @param texID Use 0 for Pacman, 1 for ghosts
      */
     public static void rect(float x, float y, float sx, float sy, int texx, int texy, int texsx, int texsy, int texID) {
         glPushMatrix();
-        {
-            if(!texLoaded){
-                loadTextures();
-                texLoaded =true;
-            }
+        {            
+            int imgX = tex[texID].getImageWidth();
+            int imgY = tex[texID].getImageHeight();
             
+            glTranslatef((int) x, (int) y, 0);
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+            tex[texID].bind();
+            
+            glBegin(GL_QUADS);
+            { 
+                glTexCoord2f((float)texx/imgX, (float) texsy/imgY);
+                    glVertex2f(0, 0);
+                glTexCoord2f((float) texx/imgX, (float) texy/imgY);
+                    glVertex2f(0, (int) sy);
+                glTexCoord2f((float) texsx/imgX, (float) texy/imgY);
+                    glVertex2f((int) sx, (int) sy);
+                glTexCoord2f((float) texsx/imgX, (float) texsy/imgY);
+                    glVertex2f((int) sx, 0);
+            }
+            glEnd();
+        }
+        glPopMatrix();
+        
+    }
+    
+    public static void rect(float x, float y, float sx, float sy, int texx, int texy, int texsx, int texsy, int rot, int texID) {
+        glPushMatrix();
+        {            
             int imgX = tex[texID].getImageWidth();
             int imgY = tex[texID].getImageHeight();
             
