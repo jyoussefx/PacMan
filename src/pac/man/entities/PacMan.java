@@ -20,7 +20,7 @@ public class PacMan extends Entity{
     Direction dir = Direction.NONE;
     float dx, dy;
     
-    private final float SPEED = 1.5f;
+    private float SPEED = 1.5f;
     
     
     public PacMan(int x, int y){
@@ -28,6 +28,7 @@ public class PacMan extends Entity{
         this.y = y;
         sx = 16;
         sy = 16;
+       
     }
 
     public void getInput(){
@@ -81,7 +82,7 @@ public class PacMan extends Entity{
         }
         x += dx;
         y += dy;
-        
+  
     }
 
     /* (non-Javadoc)
@@ -93,5 +94,11 @@ public class PacMan extends Entity{
         
     }
     
+  public float[] getLocation(float x,float y){
+	  float[] location=new float[2];
+	  location[0]=x;
+      location[1]=y;
+	  return location;
+  }
     
 }

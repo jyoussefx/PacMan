@@ -18,9 +18,12 @@ import pac.man.states.State.States;
 public class GameHandler {
 
     
-    private PacMan pac;
+    private static PacMan pac;
     public static States state;
     public static Game game;
+    
+    //TODO tile map
+    //TODO entity map
 
     public GameHandler(){
         Draw.loadTextures();
@@ -49,6 +52,10 @@ public class GameHandler {
     public void render() {
         // TODO Auto-generated method stub
         pac.render();
+    }
+    
+    public static float[] getPac(){
+    	return pac.getLocation(pac.getX(), pac.getY());
     }
 
 }

@@ -7,7 +7,7 @@
 	<classpathentry kind="lib" path="jar/lwjgl_util.jar"/>
 	<classpathentry kind="lib" path="jar/lwjgl.jar">
 		<attributes>
-			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="PacMan/native/windows"/>
+			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="PacMan/native/macosx"/>
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="jar/slick-util.jar"/>
