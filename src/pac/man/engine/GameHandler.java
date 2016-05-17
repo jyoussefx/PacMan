@@ -23,11 +23,35 @@ public class GameHandler {
     public static Game game;
     
     //TODO tile map
+    public static int[][] map=new int[8][8];
     //TODO entity map
 
     public GameHandler(){
         Draw.loadTextures();
         pac = new PacMan(16,16);
+       
+       for(int i:map[0]){
+    	   if (i==0)
+    		   map[0][i]=1;
+    	   else if (i==map.length)
+    		   map[0][i]=2;
+    	   else
+    		   map[0][i]=5;
+       }
+       
+       for(int i:map[map.length]){
+    	   if (i==0)
+    		   map[0][i]=3;
+    	   else if (i==map.length-1)
+    		   map[0][i]=4;
+    	   else
+    		   map[0][i]=5;
+       }
+       
+       for (int i=0;i<map.length-1;i++){
+    	   map[i][0]=6;
+    	   map[i][map.length-1]=6;
+       }
     }
     
     /**
@@ -56,6 +80,10 @@ public class GameHandler {
     
     public static float[] getPac(){
     	return pac.getLocation(pac.getX(), pac.getY());
+    }
+    
+    public static int[][] getTileMap(){
+    	return map;
     }
 
 }
