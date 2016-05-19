@@ -100,5 +100,18 @@ public class PacMan extends Entity{
       location[1]=y;
 	  return location;
   }
+  
+  public int[] getMapLocation(float x, float y){
+	  int xIndex; 
+	  int yIndex;
+	  
+	  xIndex=(int)x/16;
+	  yIndex=(int)y/16;
+	  
+	  int[]mapLocation=new int[2];
+	  mapLocation[0]=xIndex;
+	  mapLocation[1]=yIndex;
+	  return mapLocation;
+  }
     
 }

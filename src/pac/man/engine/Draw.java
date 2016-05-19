@@ -110,5 +110,27 @@ public class Draw {
             e.printStackTrace();
         }
     }
+    
+    
+    
+    
+    public static void rect(float x, float y, int sx, int sy){
+    	glPushMatrix();{
+    		 glTranslatef((int) x, (int) y, 0);
+    		 
+    		 glBegin(GL_QUADS);
+             { 
+          
+                 glVertex2f(0, 0);
+                
+                 glVertex2f(0, (int) sy);
+                
+                 glVertex2f((int) sx, (int) sy);
+                
+                 glVertex2f((int) sx, 0);
+             }
+             glEnd();
+    	}
+    }
 }
 

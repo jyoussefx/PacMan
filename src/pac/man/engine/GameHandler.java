@@ -25,11 +25,13 @@ public class GameHandler {
     //TODO tile map
     public static int[][] map=new int[8][8];
     //TODO entity map
+    public static int[][] entityMap=new int[8][8];
 
     public GameHandler(){
         Draw.loadTextures();
         pac = new PacMan(16,16);
        
+       //Loads empty map with border into array
        for(int i:map[0]){
     	   if (i==0)
     		   map[0][i]=1;
@@ -39,7 +41,7 @@ public class GameHandler {
     		   map[0][i]=5;
        }
        
-       for(int i:map[map.length]){
+       for(int i:map[map.length-1]){
     	   if (i==0)
     		   map[0][i]=3;
     	   else if (i==map.length-1)
@@ -52,6 +54,12 @@ public class GameHandler {
     	   map[i][0]=6;
     	   map[i][map.length-1]=6;
        }
+       
+       //Loads empty entity map and subs in entity positions
+       int pacIndex[]=new int[2];
+       pacIndex=pac.getMapLocation(pac.getX(), pac.getY());
+       entityMap[pacIndex[0]][pacIndex[1]]=1;
+       
     }
     
     /**
@@ -80,6 +88,10 @@ public class GameHandler {
     
     public static float[] getPac(){
     	return pac.getLocation(pac.getX(), pac.getY());
+    }
+    
+    public static int[] getPacIndex(){
+    	return pac.getMapLocation(pac.getX(), pac.getY());
     }
     
     public static int[][] getTileMap(){
