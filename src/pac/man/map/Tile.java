@@ -16,9 +16,9 @@ public class Tile {
     
     int x, y;
     
-    public final static int TILE_SIZE = 16;
+    public final static int SIZE = 8;
     
-    public Tile(TileID id){
+    public Tile(int x, int y, TileID id){
         this.id = id;
     }
     
@@ -59,7 +59,8 @@ public class Tile {
             break;
         default:
             break;
-        
         }
+        
+        Draw.rect(x, y, SIZE, SIZE);
     }
 }

@@ -6,6 +6,8 @@
 package pac.man.engine;
 
 import pac.man.entities.PacMan;
+import pac.man.map.Tile;
+import pac.man.map.TileID;
 import pac.man.states.Game;
 import pac.man.states.State.States;
 
@@ -21,6 +23,8 @@ public class GameHandler {
     private static PacMan pac;
     public static States state;
     public static Game game;
+    
+    public Tile test;
     
     //TODO tile map
     public static int[][] map=new int[8][8];
@@ -55,6 +59,8 @@ public class GameHandler {
     	   map[i][map.length-1]=6;
        }
        
+       test = new Tile(0,0, TileID.BLANK);
+       
        //Loads empty entity map and subs in entity positions
        int pacIndex[]=new int[2];
        pacIndex=pac.getMapLocation(pac.getX(), pac.getY());
@@ -84,6 +90,7 @@ public class GameHandler {
     public void render() {
         // TODO Auto-generated method stub
         pac.render();
+        test.render();
     }
     
     public static float[] getPac(){
