@@ -17,7 +17,7 @@ public abstract class Entity {
     protected Type id;
     
     public enum Type{
-        PACMAN, PELLET, GHOST, FRUIT;
+        PACMAN, PELLET, BLINKY, INKY, PINKY, CLYDE, FRUIT;
     }
     
     public abstract void update();
