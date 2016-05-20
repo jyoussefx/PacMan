@@ -3,20 +3,8 @@
  */
 package pac.man.engine;
 
-import static org.lwjgl.opengl.GL11.GL_NEAREST;
-import static org.lwjgl.opengl.GL11.GL_QUADS;
-import static org.lwjgl.opengl.GL11.GL_TEXTURE_2D;
-import static org.lwjgl.opengl.GL11.GL_TEXTURE_MAG_FILTER;
-import static org.lwjgl.opengl.GL11.GL_TEXTURE_MIN_FILTER;
-import static org.lwjgl.opengl.GL11.glBegin;
-import static org.lwjgl.opengl.GL11.glEnd;
-import static org.lwjgl.opengl.GL11.glPopMatrix;
-import static org.lwjgl.opengl.GL11.glPushMatrix;
-import static org.lwjgl.opengl.GL11.glRotatef;
-import static org.lwjgl.opengl.GL11.glTexCoord2f;
-import static org.lwjgl.opengl.GL11.glTexParameteri;
-import static org.lwjgl.opengl.GL11.glTranslatef;
-import static org.lwjgl.opengl.GL11.glVertex2f;
+import static org.lwjgl.opengl.GL11.*;
+
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -117,10 +105,10 @@ public class Draw {
     public static void rect(float x, float y, int sx, int sy){
     	glPushMatrix();{
     		 glTranslatef((int) x, (int) y, 0);
-    		 
+    		 glColor3f(0.0f,0.0f,1.0f);
     		 glBegin(GL_QUADS);
              { 
-          
+            	 
                  glVertex2f(0, 0);
                 
                  glVertex2f(0, (int) sy);
