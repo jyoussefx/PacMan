@@ -53,7 +53,7 @@ public class Tile {
             break;       
         case UL_PEN:     
             break;
-        case UR_CORNER:  
+        case UR_CORNER:
             break;       
         case UR_PEN:     
             break;
@@ -61,6 +61,6 @@ public class Tile {
             break;
         }
         
-        Draw.rect(x, y, SIZE, SIZE);
+        Draw.cRect(x, y, SIZE, SIZE, 192, 0, 255);
     }
 }

@@ -9,10 +9,12 @@ import static org.lwjgl.opengl.GL11.GL_TEXTURE_2D;
 import static org.lwjgl.opengl.GL11.GL_TEXTURE_MAG_FILTER;
 import static org.lwjgl.opengl.GL11.GL_TEXTURE_MIN_FILTER;
 import static org.lwjgl.opengl.GL11.glBegin;
+import static org.lwjgl.opengl.GL11.glColor3f;
+import static org.lwjgl.opengl.GL11.glDisable;
+import static org.lwjgl.opengl.GL11.glEnable;
 import static org.lwjgl.opengl.GL11.glEnd;
 import static org.lwjgl.opengl.GL11.glPopMatrix;
 import static org.lwjgl.opengl.GL11.glPushMatrix;
-import static org.lwjgl.opengl.GL11.glRotatef;
 import static org.lwjgl.opengl.GL11.glTexCoord2f;
 import static org.lwjgl.opengl.GL11.glTexParameteri;
 import static org.lwjgl.opengl.GL11.glTranslatef;
@@ -34,6 +36,12 @@ public class Draw {
     
     private static Texture[] tex = new Texture[1];
     
+    
+    public static void rect(float x, float y, float sx, float sy, int texx, int texy, int texID) {
+        rect(x, y, sx, sy, texx, texy, texx + (int)sx, texy + (int)sy, texID);
+    }
+
+    
     /**
      * Draws a sprite on the screen from the specified image
      * 
@@ -48,36 +56,13 @@ public class Draw {
      * @param texID Use 0 for Pacman, 1 for ghosts
      */
     public static void rect(float x, float y, float sx, float sy, int texx, int texy, int texsx, int texsy, int texID) {
-        glPushMatrix();
-        {            
-            int imgX = tex[texID].getImageWidth();
-            int imgY = tex[texID].getImageHeight();
-            
-            glTranslatef((int) x, (int) y, 0);
-            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-            tex[texID].bind();
-            
-            glBegin(GL_QUADS);
-            { 
-                glTexCoord2f((float)texx/imgX, (float) texsy/imgY);
-                    glVertex2f(0, 0);
-                glTexCoord2f((float) texx/imgX, (float) texy/imgY);
-                    glVertex2f(0, (int) sy);
-                glTexCoord2f((float) texsx/imgX, (float) texy/imgY);
-                    glVertex2f((int) sx, (int) sy);
-                glTexCoord2f((float) texsx/imgX, (float) texsy/imgY);
-                    glVertex2f((int) sx, 0);
-            }
-            glEnd();
-        }
-        glPopMatrix();
-        
+        rect(x, y, sx, sy, texx, texy, texsx, texsy, 0, texID);
     }
     
     public static void rect(float x, float y, float sx, float sy, int texx, int texy, int texsx, int texsy, int rot, int texID) {
-        glPushMatrix();
-        {            
+        glPushMatrix();{  
+            glEnable(GL_TEXTURE_2D);
+            
             int imgX = tex[texID].getImageWidth();
             int imgY = tex[texID].getImageHeight();
             
@@ -86,8 +71,9 @@ public class Draw {
             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
             tex[texID].bind();
             
-            glBegin(GL_QUADS);
-            { 
+            glBegin(GL_QUADS);{
+                glColor3f(1,1,1);
+                
                 glTexCoord2f((float)texx/imgX, (float) texsy/imgY);
                     glVertex2f(0, 0);
                 glTexCoord2f((float) texx/imgX, (float) texy/imgY);
@@ -114,20 +100,24 @@ public class Draw {
     
     
     
-    public static void rect(float x, float y, int sx, int sy){
+    public static void cRect(float x, float y, int sx, int sy, float r, float g, float b){
     	glPushMatrix();{
+             glDisable(GL_TEXTURE_2D);
+
+    	    
     		 glTranslatef((int) x, (int) y, 0);
+
     		 
     		 glBegin(GL_QUADS);
              { 
-          
+                 
+                 glColor3f(r/255,g/255,b/255);
+                 
                  glVertex2f(0, 0);
-                
                  glVertex2f(0, (int) sy);
-                
                  glVertex2f((int) sx, (int) sy);
-                
                  glVertex2f((int) sx, 0);
+                 
              }
              glEnd();
     	}
