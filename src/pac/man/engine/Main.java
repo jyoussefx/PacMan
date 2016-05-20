@@ -91,6 +91,8 @@ public class Main {
         } catch (LWJGLException e) {
             e.printStackTrace();
         }
+        
+        
     }
 
     /**
@@ -171,6 +173,6 @@ public class Main {
     private static void cleanUp(){
         Display.destroy();
         AL.destroy();
-    }   
+    } 
 
 }

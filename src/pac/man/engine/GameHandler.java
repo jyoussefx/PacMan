@@ -66,6 +66,12 @@ public class GameHandler {
        pacIndex=pac.getMapLocation(pac.getX(), pac.getY());
        entityMap[pacIndex[0]][pacIndex[1]]=1;
        
+       //draws tiles
+       Draw.rect(0, 0, 128, 16);
+       Draw.rect(0, 112, 128, 8);
+       Draw.rect(0,0,8,128);
+       Draw.rect(112, 0, 8, 128);
+       
     }
     
     /**

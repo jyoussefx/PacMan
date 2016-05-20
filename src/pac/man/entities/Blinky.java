@@ -38,6 +38,7 @@ public class Blinky extends Entity{
 		//compare locations
 		
 		//choose move
+		
 		//execute
 		
 	}
