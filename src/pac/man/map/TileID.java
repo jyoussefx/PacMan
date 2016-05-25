@@ -34,4 +34,24 @@ public enum TileID{
     public int getID(){
         return num;
     }
+    
+    public TileID getTile(){
+        switch(num){
+        case  0: return BLANK;    
+        case  1: return UL_CORNER;
+        case  2: return UR_CORNER;
+        case  3: return DL_CORNER;
+        case  4: return DR_CORNER;
+        case  5: return LR_STRAIGHT;
+        case  6: return UD_STRAIGHT;
+        case  7: return UR_PEN;
+        case  8: return UL_PEN;
+        case  9: return DR_PEN;
+        case 10: return DL_PEN;
+        case 11: return OPEN_PEN;
+        case 12: return LR_PEN;
+        case 13: return UD_PEN;
+        default: return BLANK;
+        }
+    }
 }

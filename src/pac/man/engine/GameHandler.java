@@ -59,7 +59,7 @@ public class GameHandler {
     	   map[i][map.length-1]=6;
        }
        
-       test = new Tile(0,0, TileID.BLANK);
+       test = new Tile(0,0, TileID.LR_STRAIGHT);
        
        //Loads empty entity map and subs in entity positions
        int pacIndex[]=new int[2];

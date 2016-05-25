@@ -35,7 +35,7 @@ import org.newdawn.slick.opengl.TextureLoader;
  */
 public class Draw {
     
-    private static Texture[] tex = new Texture[1];
+    private static Texture[] tex = new Texture[2];
     
     
     public static void rect(float x, float y, float sx, float sy, int texx, int texy, int texID) {
@@ -93,6 +93,7 @@ public class Draw {
     public static void loadTextures() {
         try {
             tex[0] = TextureLoader.getTexture("PNG", new FileInputStream(new File("res/filler.png")));
+            tex[1] = TextureLoader.getTexture("PNG", new FileInputStream(new File("res/bg_tiles.png")));
         } catch (Exception e) {
             e.printStackTrace();
         }

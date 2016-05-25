@@ -16,51 +16,35 @@ public class Tile {
     
     int x, y;
     
-    public final static int SIZE = 8;
+    public final static int SIZE = 16;
     
     public Tile(int x, int y, TileID id){
         this.id = id;
+        this.x = x;
+        this.y = y;
     }
     
     public void render(){
         int texX;
-        int texY;
         
         switch(id){
-        case BLANK:
-            texX = 0;
-            texY = 0;
-            break;       
-        case DL_CORNER:
-            break;       
-        case DL_PEN:     
-            break;       
-        case DR_CORNER:  
-            break;       
-        case DR_PEN:     
-            break;       
-        case LR_PEN:     
-            break;       
+        case BLANK      :texX = 112;break;
+        case UL_CORNER  :
+        case UR_CORNER  :
+        case DL_CORNER  :
+        case DR_CORNER  :texX =   0;break;
         case LR_STRAIGHT:
-            break;       
-        case OPEN_PEN:   
-            break;       
-        case UD_PEN:
-            break;       
-        case UD_STRAIGHT:
-            break;       
-        case UL_CORNER:  
-            break;       
-        case UL_PEN:     
-            break;
-        case UR_CORNER:
-            break;       
-        case UR_PEN:     
-            break;
-        default:
-            break;
+        case UD_STRAIGHT:texX =  96;break;
+        case UR_PEN     :
+        case UL_PEN     :
+        case DR_PEN     :
+        case DL_PEN     :texX =  48;break;
+        case OPEN_PEN   :texX =  96;break;
+        case LR_PEN     :
+        case UD_PEN     :texX =  16;break;
+        default:         texX = 112;break;
         }
-        
-        Draw.cRect(x, y, SIZE, SIZE, 192, 0, 255);
+
+        Draw.rect(x, y, SIZE, SIZE, texX, 0, 1);
     }
 }
