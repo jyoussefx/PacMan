@@ -35,8 +35,8 @@ public enum TileID{
         return num;
     }
     
-    public TileID getTile(){
-        switch(num){
+    public static TileID getTile(int n){
+        switch(n){
         case  0: return BLANK;    
         case  1: return UL_CORNER;
         case  2: return UR_CORNER;
