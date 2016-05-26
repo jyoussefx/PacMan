@@ -13,7 +13,7 @@ import pac.man.engine.GameHandler;
  * @version 0.1
  */
 public class Blinky extends Entity{
-
+	
 	public Blinky(int x, int y){
 		this.x = x;
         this.y = y;
@@ -30,17 +30,33 @@ public class Blinky extends Entity{
 	public void update() {
 		//pull pacman location
 		float[] pacLoc=new float[2];
-		pacLoc=GameHandler.getPac();
+		pacLoc=GameHandler.getLoc(GameHandler.pac);
 		
 		float pacX=pacLoc[0];
 		float pacY=pacLoc[1];
 		
+		int[] pacIndex=new int[2];
+		pacIndex=GameHandler.getIndex(GameHandler.pac);
+		
 		//compare locations
+		if(isDecision()){
+			if(pacX>x){
+				
+			}else if(pacX<x){
+				
+			}
+		}else{
+	        move(dir);
+		}
 		
 		//choose move
 		
 		//execute
 		
+	}
+	
+	public boolean isDecision(){
+		return true;
 	}
 
 }
