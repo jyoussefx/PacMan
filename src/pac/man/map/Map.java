@@ -12,6 +12,11 @@ package pac.man.map;
 public class Map {
     Tile[][] tiles;
     
+    
+    /**
+     * 
+     * @param t
+     */
     public Map(int[][] t){
         tiles = new Tile[t.length][t[0].length];
         
@@ -22,6 +27,10 @@ public class Map {
         }
     }
     
+    
+    /**
+     * Goes through every tile in the map and renders it
+     */
     public void render(){
         for (Tile[] t : tiles) {
             for (Tile tile : t) {

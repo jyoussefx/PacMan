@@ -63,9 +63,7 @@ public class GameHandler {
        }
        
        realMap = new Map(map);
-       
-       test = new Tile(0,0, TileID.LR_STRAIGHT);
-       
+              
        //Loads empty entity map and subs in entity positions
        int pacIndex[]=new int[2];
        pacIndex=pac.getMapLocation(pac.getX(), pac.getY());
@@ -96,7 +94,6 @@ public class GameHandler {
         // TODO Auto-generated method stub
         realMap.render();
         pac.render();
-        test.render();
     }
     
     public static float[] getPac(){

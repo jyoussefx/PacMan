@@ -27,24 +27,21 @@ public class Tile {
     public void render(){
         int texX;
         
+        int rot = 0;
+        
         switch(id){
-        case BLANK      :texX = 112;break;
-        case UL_CORNER  :
-        case UR_CORNER  :
-        case DL_CORNER  :
-        case DR_CORNER  :texX =   0;break;
-        case LR_STRAIGHT:
-        case UD_STRAIGHT:texX =  96;break;
-        case UR_PEN     :
-        case UL_PEN     :
-        case DR_PEN     :
-        case DL_PEN     :texX =  48;break;
-        case OPEN_PEN   :texX =  96;break;
-        case LR_PEN     :
-        case UD_PEN     :texX =  16;break;
-        default:         texX = 112;break;
+        case BLANK     :texX =   0;break;
+        case M_CORNER  :texX =   0;break;
+        case M_STRAIGHT:texX =   0;break;
+        case CORNER    :texX =   0;break;
+        case STRAIGHT  :texX =   0;break;
+        case P_CORNER  :texX =   0;break;
+        case P_STRAIGHT:texX =   0;break;
+        case P_END     :texX =   0;break;
+        case P_CLOSING :texX =   0;break;
+        default        :texX =   0;break;
         }
-
+        
         Draw.rect(x, y, SIZE, SIZE, texX, 0, 1);
     }
 }
