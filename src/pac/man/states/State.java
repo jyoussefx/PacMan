@@ -16,7 +16,8 @@ public abstract class State {
     protected static States state;
     
     public enum States{
-        GAME;
+        GAME,
+    	MENU;
     }
     
     public abstract void getInput();

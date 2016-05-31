@@ -72,6 +72,7 @@ public class Main {
         initGL();
 
         initGame();
+        
         gameLoop();
         cleanUp();
     }
@@ -119,6 +120,7 @@ public class Main {
         glLoadIdentity();
 
         gamehandler.render();
+        TextHandler.render();
 
         Display.update();   //updates the display with the changes
         Display.sync(60);   //makes up for lost time
@@ -136,7 +138,7 @@ public class Main {
             update();
             render();
 //            SoundStore.get().poll(0);
-
+            
             if(Keyboard.isKeyDown(Keyboard.KEY_ESCAPE)){
                 break;
             }
