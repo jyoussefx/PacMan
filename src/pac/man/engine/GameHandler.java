@@ -18,7 +18,7 @@ import pac.man.states.State.States;
  * @author Aaron Roy
  * @version 
  */
-public class GameHandler {
+public class GameHandler implements Playable{
 
     
     private static PacMan pac;

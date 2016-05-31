@@ -3,19 +3,23 @@
  */
 package pac.man.map;
 
+import pac.man.engine.Renderable;
+
+
 /**
  * Represents an array of tiles
  *
  * @author Aaron Roy
  * @version 
  */
-public class Map {
+public class Map implements Renderable{
     Tile[][] tiles;
     
     
     /**
+     * Creates a map from an integer array
      * 
-     * @param t
+     * @param t The input int[][] array
      */
     public Map(int[][] t){
         tiles = new Tile[t.length][t[0].length];
@@ -37,5 +41,15 @@ public class Map {
                 tile.render();
             }
         }
+    }
+
+
+    /* (non-Javadoc)
+     * @see pac.man.engine.Renderable#update()
+     */
+    @Override
+    public void update() {
+        // TODO Auto-generated method stub
+        
     }
 }
