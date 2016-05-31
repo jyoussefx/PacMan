@@ -11,8 +11,11 @@ import pac.man.engine.GameHandler;
  */
 public class Inky extends Entity {
 
-// He needs Pac-Man's current tile/orientation and Blinky's current tile to calculate
-// his final target. To envision Inky's target, imagine an intermediate offset two tiles 
+/* He needs Pac-Man's current tile/orientation and Blinky's current tile to calculate
+   his final target. */
+	
+	
+// an intermediate offset two tiles 
 // away from Pac-Man's tile in the direction Pac-Man is moving (shown as the dashed, green
 // tile in the picture above), then draw a line from Blinky's tile to that offset. Now 
 // double the line length by extending the line out just as far again, and you will have 
@@ -60,7 +63,27 @@ public class Inky extends Entity {
 		
 		float redX=redLoc[0];
 		float redY=redLoc[1];
-		//compare locations
+		
+		
+		//calculate Blinky's Target by doubling the length from Blinky to the Pacman (2 tile) offset and extending it
+		
+		
+		
+		//if pacman is facing left
+		float blueX = Math.abs(redX-pacX-2);
+		float blueY = Math.abs(redY-pacY);
+		
+		//else if pacman is facing right
+		float blueX = Math.abs(redX-pacX+2);
+		float blueY = Math.abs(redY-pacY);
+		
+		//else if pacman is facing down
+		float blueX = Math.abs(redX-pacX);
+		float blueY = Math.abs(redY-pacY-2);
+		
+		//else if pacman is facing up
+		float blueX = Math.abs(redX-pacX+2);
+		float blueY = Math.abs(redY-pacY+2);
 		
 		//choose move
 		
