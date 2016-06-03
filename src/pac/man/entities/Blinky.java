@@ -30,13 +30,13 @@ public class Blinky extends Entity{
 	public void update() {
 		//pull pacman location
 		float[] pacLoc=new float[2];
-		pacLoc=GameHandler.getLoc(GameHandler.pac);
+		//pacLoc=GameHandler.getLoc(GameHandler.pac);
 		
 		float pacX=pacLoc[0];
 		float pacY=pacLoc[1];
 		
 		int[] pacIndex=new int[2];
-		pacIndex=GameHandler.getIndex(GameHandler.pac);
+		//pacIndex=GameHandler.getIndex(GameHandler.pac);
 		
 		//compare locations
 		if(isDecision()){

@@ -93,6 +93,7 @@ public class Draw {
     public static void loadTextures() {
         try {
             tex[0] = TextureLoader.getTexture("PNG", new FileInputStream(new File("res/filler.png")));
+            tex[1] = TextureLoader.getTexture("PNG", new FileInputStream(new File("res/all_tiles.png")));
             tex[2] = TextureLoader.getTexture("PNG", new FileInputStream(new File("res/nesfont.png")));
         } catch (Exception e) {
             e.printStackTrace();
