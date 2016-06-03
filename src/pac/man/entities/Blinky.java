@@ -12,7 +12,7 @@ import pac.man.engine.GameHandler;
  * @author Carlos Valencia
  * @version 0.1
  */
-public class Blinky extends Entity{
+public class Blinky extends Ghosts{
 	
 	public Blinky(int x, int y){
 		this.x = x;
