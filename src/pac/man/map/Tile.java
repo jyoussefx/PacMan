@@ -16,7 +16,7 @@ public class Tile {
     
     int x, y;
     
-    public final static int SIZE = 16;
+    public final static int SIZE = 8;
     
     public Tile(int x, int y, TileID id){
         this.id = id;
@@ -27,21 +27,56 @@ public class Tile {
     public void render(){
         int texX;
         
-        int rot = 0;
+        int rot;
         
         switch(id){
-        case BLANK     :texX =   0;break;
-        case M_CORNER  :texX =   0;break;
-        case M_STRAIGHT:texX =   0;break;
-        case CORNER    :texX =   0;break;
-        case STRAIGHT  :texX =   0;break;
-        case P_CORNER  :texX =   0;break;
-        case P_STRAIGHT:texX =   0;break;
-        case P_END     :texX =   0;break;
-        case P_CLOSING :texX =   0;break;
-        default        :texX =   0;break;
+        case BLANK         :texX = 64;rot = 0;break;
+        case CORNER_UL     :texX = 16;rot = 0;break;
+        case CORNER_UR     :texX = 16;rot = 3;break;
+        case CORNER_DR     :texX = 16;rot = 2;break;
+        case CORNER_DL     :texX = 16;rot = 1;break;
+        case STRAIGHT_ULR  :texX = 24;rot = 0;break;
+        case STRAIGHT_RUD  :texX = 24;rot = 3;break;
+        case STRAIGHT_DLR  :texX = 24;rot = 2;break;
+        case STRAIGHT_LUD  :texX = 24;rot = 1;break;
+        case M_CORNER_UL   :texX =  0;rot = 0;break;
+        case M_CORNER_UR   :texX =  0;rot = 3;break;
+        case M_CORNER_DR   :texX =  0;rot = 2;break;
+        case M_CORNER_DL   :texX =  0;rot = 1;break;
+        case M_STRAIGHT_ULR:texX =  8;rot = 0;break;
+        case M_STRAIGHT_RUD:texX =  8;rot = 3;break;
+        case M_STRAIGHT_DLR:texX =  8;rot = 2;break;
+        case M_STRAIGHT_LUD:texX =  8;rot = 1;break;
+        case P_CLOSING     :texX = 56;rot = 0;break;
+        case P_CORNER_UL   :texX = 32;rot = 0;break;
+        case P_CORNER_UR   :texX = 32;rot = 3;break;
+        case P_CORNER_DR   :texX = 32;rot = 2;break;
+        case P_CORNER_DL   :texX = 32;rot = 1;break;
+        case P_END_L       :texX = 48;rot = 0;break;
+        case P_END_R       :texX = 48;rot = 4;break;
+        default            :texX =  0;rot = 0;break;
         }
         
-        Draw.rect(x, y, SIZE, SIZE, texX, 0, 1);
+        switch(rot){
+        case 0:
+          Draw.rect(x, y, SIZE, SIZE, texX, 0, 1);
+          break;
+        case 1:
+          Draw.rect(x+SIZE, y, SIZE, SIZE, texX, 0, 1, 1);
+          break;
+        case 2:
+          Draw.rect(x+SIZE, y+SIZE, SIZE, SIZE, texX, 0, 2, 1);
+          break;
+        case 3:
+          Draw.rect(x, y+SIZE, SIZE, SIZE, texX, 0, 3, 1);
+          break;
+        case 4:
+          Draw.rect(x+SIZE, y+SIZE-4, SIZE, SIZE, texX, 0, 2, 1);
+          break;
+        }
+    }
+    
+    public void setType(TileID id){
+      this.id = id;
     }
 }

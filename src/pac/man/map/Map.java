@@ -24,9 +24,9 @@ public class Map implements Renderable{
     public Map(int[][] t){
         tiles = new Tile[t.length][t[0].length];
         
-        for (int i = 0; i < t.length; i++) {
+        for (int i = 0, k = t.length-1; i < t.length; i++, k--) {
             for (int j = 0; j < t[0].length; j++) {
-                tiles[i][j] = new Tile(j*16, i*16, TileID.getTile(t[i][j]));
+                tiles[i][j] = new Tile(j*8+50, i*8+50, TileID.getTile(t[k][j]));
             }
         }
     }

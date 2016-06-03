@@ -30,37 +30,25 @@ public class GameHandler implements Playable{
     public Tile test;
     
     //TODO tile map
-    public static int[][] map=new int[8][8];
+    public static int[][] map= {{ 9,13,13,13,13,13,13,10},
+                                {16, 0, 0, 0, 0, 0, 0,14},
+                                {16, 0, 0, 0, 0, 0, 0,14},
+                                {16, 0, 0, 0, 0, 0, 0,14},
+                                {16, 0, 0, 0, 0, 0, 0,14},
+                                {16, 0, 0, 0, 0, 0, 0,14},
+                                {16, 0, 0, 0, 0, 0, 0,14},
+                                {12,15,15,15,15,15,15,11}};
     //TODO entity map
     public static int[][] entityMap=new int[8][8];
 
+    /**
+     * 
+     */
     public GameHandler(){
         Draw.loadTextures();
         pac = new PacMan(16,16);
        
-       //Loads empty map with border into array
-       for(int i:map[0]){
-    	   if (i==0)
-    		   map[0][i]=1;
-    	   else if (i==map.length)
-    		   map[0][i]=2;
-    	   else
-    		   map[0][i]=5;
-       }
-       
-       for(int i:map[map.length-1]){
-    	   if (i==0)
-    		   map[0][i]=3;
-    	   else if (i==map.length-1)
-    		   map[0][i]=4;
-    	   else
-    		   map[0][i]=5;
-       }
-       
-       for (int i=0;i<map.length-1;i++){
-    	   map[i][0]=6;
-    	   map[i][map.length-1]=6;
-       }
+       test=new Tile(8*9, 8*9, TileID.CORNER_DR);
        
        realMap = new Map(map);
               
@@ -75,7 +63,6 @@ public class GameHandler implements Playable{
      * 
      */
     public void getInput() {
-        // TODO Auto-generated method stub
         pac.getInput();
     }
 
@@ -83,17 +70,17 @@ public class GameHandler implements Playable{
      * 
      */
     public void update() {
-        // TODO Auto-generated method stub
         pac.update();
+        test.setType(TileID.CORNER_DL);
     }
 
     /**
      * 
      */
     public void render() {
-        // TODO Auto-generated method stub
         realMap.render();
         pac.render();
+//        test.render();
     }
     
     public static float[] getPac(){
