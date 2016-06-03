@@ -6,10 +6,10 @@
 package pac.man.engine;
 
 import pac.man.entities.Entity;
-import pac.man.entities.PacMan;
-import pac.man.map.Tile;
-import pac.man.map.TileID;
+import pac.man.entities.Pellet;
 import pac.man.states.Game;
+import pac.man.states.Menu;
+import pac.man.states.State;
 import pac.man.states.State.States;
 
 /**
@@ -20,22 +20,30 @@ import pac.man.states.State.States;
  */
 public class GameHandler {
 
-    
-    public static PacMan pac;
     public static States state;
-    public static Game game;
     
-    public Tile test;
+    public static Game game;
+    public static Menu menu;
+    
+    Pellet pellet;
+    
+    //public Tile test;
     
     //TODO tile map
     public static int[][] map=new int[8][8];
     //TODO entity map
     public static int[][] entityMap=new int[8][8];
 
+    
     public GameHandler(){
-        Draw.loadTextures();
-        pac = new PacMan(16,16);
+       Draw.loadTextures();
        
+       game = new Game();
+       menu = new Menu();
+      
+       state = States.GAME;
+       
+        
        //Loads empty map with border into array
        for(int i:map[0]){
     	   if (i==0)
@@ -60,11 +68,11 @@ public class GameHandler {
     	   map[i][map.length-1]=6;
        }
        
-       test = new Tile(0,0, TileID.BLANK);
+       //test = new Tile(0,0, TileID.BLANK);
        
        //Loads empty entity map and subs in entity positions
        int pacIndex[]=new int[2];
-       pacIndex=pac.getMapLocation(pac.getX(), pac.getY());
+       pacIndex=game.getPac().getMapLocation(game.getPac().getX(), game.getPac().getY());
        entityMap[pacIndex[0]][pacIndex[1]]=1;
        
        //draws tiles
@@ -75,8 +83,18 @@ public class GameHandler {
      * 
      */
     public void getInput() {
-        // TODO Auto-generated method stub
-        pac.getInput();
+        switch (state)
+        {
+		case GAME:
+			game.getInput();
+			break;
+		case MENU:
+			menu.getInput();
+			break;
+		default:
+			break;
+        
+        }
     }
 
     /**
@@ -84,7 +102,18 @@ public class GameHandler {
      */
     public void update() {
         // TODO Auto-generated method stub
-        pac.update();
+    	switch (state)
+        {
+ 		case GAME:
+ 			game.update();
+ 			break;
+ 		case MENU:
+ 			menu.update();
+ 			break;
+ 		default:
+ 			break;
+         
+         }
     }
 
     /**
@@ -92,13 +121,19 @@ public class GameHandler {
      */
     public void render() {
         // TODO Auto-generated method stub
-        pac.render();
-        test.render();
-        
-        Draw.cRect(0, 0, 128, 16,0,0,255);
-        Draw.cRect(0, 112, 128, 8,0,0,255);
-        Draw.cRect(0,0,8,128,0,0,255);
-        Draw.cRect(112, 0, 8, 128,0,0,255);
+    	switch (state)
+        {
+ 		case GAME:
+ 			game.render();
+ 			break;
+ 		case MENU:
+ 			menu.render();
+ 			break;
+ 		default:
+ 			break;
+         
+         }
+       
     }
     
     public static float[] getLoc(Entity entity){
@@ -111,6 +146,12 @@ public class GameHandler {
     
     public static int[][] getTileMap(){
     	return map;
+    }
+    
+    public void switchStates(State.States s)
+    {
+    	state = s;
+    	if (s==States.MENU) menu.load();
     }
 
 }

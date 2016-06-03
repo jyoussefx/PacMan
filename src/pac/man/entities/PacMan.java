@@ -3,6 +3,8 @@
  */
 package pac.man.entities;
 
+import java.awt.Rectangle;
+
 import org.lwjgl.input.Keyboard;
 
 import pac.man.engine.Draw;
@@ -15,12 +17,15 @@ import pac.man.engine.Draw;
  */
 public class PacMan extends Entity{
     
-    
+    public Rectangle area;
+	
     public PacMan(int x, int y){
         this.x = x;
         this.y = y;
         sx = 16;
         sy = 16;
+        
+        this.area = new Rectangle(x, y, (int) sx, (int) sy);
        
     }
 
@@ -53,6 +58,7 @@ public class PacMan extends Entity{
     @Override
     public void update() {        
     	move(dir);
+    	area.setLocation((int) x, (int) y); 
     }
 
     /* (non-Javadoc)

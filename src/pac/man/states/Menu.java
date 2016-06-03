@@ -28,5 +28,12 @@ public class Menu extends State {
 		TextHandler.write("1 Player", 100, 100, 12);
 	}
 	
+	public Menu()
+	{
+		super(States.MENU);
+	}
+
+	
+	
 
 }

@@ -5,7 +5,6 @@ import java.util.ArrayList;
 /**
  * Writes NES-font text at a specified point
  * NOTE: class is only referenced statically
- * Creds to J-chan for the texture coordinates
  * 
  * @author Andrew Faulkenberry
  * @version 

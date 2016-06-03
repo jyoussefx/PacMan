@@ -25,14 +25,12 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
-import pac.man.engine.AudioHandler;
-import pac.man.engine.GameHandler;
-
 import org.lwjgl.LWJGLException;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.openal.AL;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
+
 //import org.newdawn.slick.openal.SoundStore;
 
 /**
@@ -103,6 +101,7 @@ public class Main {
     private static void initGame(){
         gamehandler = new GameHandler();
         AudioHandler.init();
+
     }
 
 
@@ -138,6 +137,8 @@ public class Main {
             update();
             render();
 //            SoundStore.get().poll(0);
+            
+            //if (Keyboard.isKeyDown(Keyboard.KEY_0)) gamehandler.switchStates(States.MENU);
             
             if(Keyboard.isKeyDown(Keyboard.KEY_ESCAPE)){
                 break;
