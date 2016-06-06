@@ -20,8 +20,8 @@ public class Tile {
     
     public Tile(int x, int y, TileID id){
         this.id = id;
-        this.x = x;
-        this.y = y;
+        this.x = x*SIZE;
+        this.y = y*SIZE;
     }
     
     public void render(){

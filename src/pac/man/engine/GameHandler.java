@@ -50,7 +50,7 @@ public class GameHandler implements Playable{
        
        test=new Tile(8*9, 8*9, TileID.CORNER_DR);
        
-       realMap = new Map(map);
+       realMap = new Map("res/Map");
               
        //Loads empty entity map and subs in entity positions
        int pacIndex[]=new int[2];
