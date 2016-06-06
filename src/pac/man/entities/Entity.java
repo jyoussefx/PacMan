@@ -16,6 +16,7 @@ public abstract class Entity {
     protected float sy;
     float dx, dy;
     protected Type id;
+
     
     private float SPEED = 1.5f;
     
@@ -25,7 +26,7 @@ public abstract class Entity {
     
     public enum Direction{UP, DOWN, LEFT, RIGHT, NONE;}
     
-    Direction dir = Direction.NONE;
+    public Direction dir = Direction.NONE;
     
     public abstract void update();
     public abstract void render();

@@ -1,3 +1,4 @@
+
 /**
  * Blinky.java		May 11, 2016, 11:17:02 AM
  */
@@ -60,3 +61,4 @@ public class Blinky extends Entity{
 	}
 
 }
+
