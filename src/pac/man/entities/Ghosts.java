@@ -3,6 +3,8 @@
  */
 package pac.man.entities;
 
+import pac.man.engine.GameHandler;
+
 /**
  * Adds degree of separation for ghosts when dying and adds 4 modes
  * @author Chan, Carlos Valencia
