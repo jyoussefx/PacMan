@@ -5,6 +5,10 @@
  */
 package pac.man.engine;
 
+import pac.man.entities.Blinky;
+import pac.man.entities.Entity;
+import pac.man.entities.Entity.Direction;
+import pac.man.entities.Inky;
 import pac.man.entities.PacMan;
 import pac.man.map.Tile;
 import pac.man.map.TileID;
@@ -20,7 +24,12 @@ import pac.man.states.State.States;
 public class GameHandler {
 
     
-    private static PacMan pac;
+    public static PacMan pac;
+    public static Blinky red;
+    public static Inky blue;
+    /*public static Pinky pink;
+    public static Clyde orange;
+    */
     public static States state;
     public static Game game;
     
@@ -67,10 +76,6 @@ public class GameHandler {
        entityMap[pacIndex[0]][pacIndex[1]]=1;
        
        //draws tiles
-       Draw.rect(0, 0, 128, 16);
-       Draw.rect(0, 112, 128, 8);
-       Draw.rect(0,0,8,128);
-       Draw.rect(112, 0, 8, 128);
        
     }
     
@@ -99,14 +104,17 @@ public class GameHandler {
         test.render();
     }
     
-    public static float[] getPac(){
-    	return pac.getLocation(pac.getX(), pac.getY());
+    public static float[] getLoc(Entity entity){
+    	return entity.getLocation(entity.getX(), entity.getY());
     }
     
-    public static int[] getPacIndex(){
-    	return pac.getMapLocation(pac.getX(), pac.getY());
+    public static int[] getIndex(Entity entity){
+    	return entity.getMapLocation(entity.getX(), entity.getY());
     }
     
+    public static Direction getDir(Entity entity){
+    	return entity.dir;
+    }
     public static int[][] getTileMap(){
     	return map;
     }

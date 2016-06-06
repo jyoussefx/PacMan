@@ -15,13 +15,6 @@ import pac.man.engine.Draw;
  */
 public class PacMan extends Entity{
     
-    private enum Direction{UP, DOWN, LEFT, RIGHT, NONE;}//controls direction presses
-    
-    Direction dir = Direction.NONE;
-    float dx, dy;
-    
-    private float SPEED = 1.5f;
-    
     
     public PacMan(int x, int y){
         this.x = x;
@@ -59,30 +52,7 @@ public class PacMan extends Entity{
      */
     @Override
     public void update() {        
-        switch(dir){
-        case DOWN:
-            dy=-SPEED;
-            dx=  0;
-            break;
-        case LEFT:
-            dx=-SPEED;
-            dy=0;
-            break;
-        case RIGHT:
-            dx=SPEED;
-            dy=0;
-            break;
-        case UP:
-            dy=SPEED;
-            dx=0;
-            break;
-        default:
-            break;
-        
-        }
-        x += dx;
-        y += dy;
-  
+    	move(dir);
     }
 
     /* (non-Javadoc)
@@ -93,25 +63,5 @@ public class PacMan extends Entity{
         Draw.rect(x, y, sx, sy, 0, 0, 16, 16, 0);
         
     }
-    
-  public float[] getLocation(float x,float y){
-	  float[] location=new float[2];
-	  location[0]=x;
-      location[1]=y;
-	  return location;
-  }
-  
-  public int[] getMapLocation(float x, float y){
-	  int xIndex; 
-	  int yIndex;
-	  
-	  xIndex=(int)x/16;
-	  yIndex=(int)y/16;
-	  
-	  int[]mapLocation=new int[2];
-	  mapLocation[0]=xIndex;
-	  mapLocation[1]=yIndex;
-	  return mapLocation;
-  }
     
 }

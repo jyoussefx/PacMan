@@ -1,0 +1,28 @@
+GHOST CLASS METHODS
+
+
+package pac.man.entities;
+
+import pac.man.engine.GameHandler;
+
+public abstract class Ghost extends Entity {
+
+	public boolean isDecision(){
+		int[] index=new int[2];
+		index=getMapLocation(x,y);
+		if(GameHandler.map[index[0]-1][index[1]]==0||
+			GameHandler.map[index[0]+1][index[1]]==0||
+			GameHandler.map[index[0]][index[1]-1]==0){
+			return true;
+		}
+		return false;
+	}
+	
+	public int[] calcChoice(int[] tile1, int [] tile2, int[] tile3, int[] target){
+		float distance1;
+		float distance2;
+		float distance3;
+		
+		
+	}
+}
