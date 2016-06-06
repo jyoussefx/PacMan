@@ -3,6 +3,8 @@
  */
 package pac.man.entities;
 
+import pac.man.engine.GameHandler;
+
 /**
  * Represents things that move or are on the screen
  *
