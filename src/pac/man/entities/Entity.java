@@ -26,7 +26,7 @@ public abstract class Entity {
     
     public enum Direction{UP, DOWN, LEFT, RIGHT, NONE;}
     
-    public Direction dir = Direction.NONE;
+    public static Direction dir = Direction.NONE;
     
     public abstract void update();
     public abstract void render();
@@ -71,9 +71,42 @@ public abstract class Entity {
         x += dx;
         y += dy;
     }
-    public int turnRight(Entity ent){
-    	return 0;
+    public void turnRight(){
+    	dir=Direction.RIGHT;
+    	move(dir);
     }
+    public void turnLeft(){
+    	dir=Direction.LEFT;
+    	move(dir);
+    }
+    
+    public boolean clearFront(){
+    	int[] index=new int[2];
+    	index=getMapLocation(x,y);
+    	if (GameHandler.map[index[0]][index[1]-1]==0){
+    		return true;
+    	}
+    	return false;
+    }
+    
+    public boolean clearRight(){
+    	int[] index=new int[2];
+    	index=getMapLocation(x,y);
+    	if (GameHandler.map[index[0]+1][index[1]]==0){
+    		return true;
+    	}
+    	return false;
+    }
+    
+    public boolean clearLeft(){
+    	int[] index=new int[2];
+    	index=getMapLocation(x,y);
+    	if (GameHandler.map[index[0]-1][index[1]]==0){
+    		return true;
+    	}
+    	return false;
+    }
+    
     
     public float[] getLocation(float x,float y){
   	  float[] location=new float[2];

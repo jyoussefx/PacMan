@@ -55,8 +55,6 @@ public class Blinky extends Ghosts{
 		
 	}
 	
-	public boolean isDecision(){
-		return true;
-	}
+	
 
 }

@@ -5,6 +5,7 @@ package pac.man.entities;
 
 import pac.man.engine.Draw;
 import pac.man.engine.GameHandler;
+import pac.man.entities.Entity.Direction;
 
 /**
  * The blue ghost.
@@ -39,7 +40,6 @@ public class Inky extends Ghosts {
 		this.y = y;
 		sx = 14;
 		sy = 14;
-		
 	}
 	
 	public void render() {
@@ -71,28 +71,27 @@ public class Inky extends Ghosts {
 		//calculate Blinky's offset 
 		
 		
-		float blueTargetX;
-		float blueTargetY;
-		float pacOffsetX;
-		float pacOffsetY;
+		float blueTargetX = 0;
+		float blueTargetY = 0;
+		float pacOffsetX = 0;
+		float pacOffsetY = 0;
 		
-		//if pacman is facing left
-		pacOffsetX = pacX-2;
-		pacOffsetY= pacY;
-		//else if pacman is facing right
-		pacOffsetX = pacX+2;
-		pacOffsetY= pacY;
-		//else if pacman is facing down
-		pacOffsetX = pacX;
-		pacOffsetY= pacY-2;
-		//else if pacman is facing up
-		pacOffsetX = pacX-2;
-		pacOffsetY= pacY+2;
+		if (PacMan.dir==Direction.LEFT)//if pacman is facing left
+		{pacOffsetX = pacX-2;
+		pacOffsetY= pacY;}
+		else if (PacMan.dir==Direction.RIGHT)//else if pacman is facing right
+		{pacOffsetX = pacX+2;
+		pacOffsetY= pacY;}
+		else if (PacMan.dir==Direction.DOWN)//else if pacman is facing down
+		{pacOffsetX = pacX;
+		pacOffsetY= pacY-2;}
+		else if (PacMan.dir==Direction.UP)//else if pacman is facing up
+		{pacOffsetX = pacX-2;
+		pacOffsetY= pacY+2;}
 		
 		
 		
 		// Calculate actual target's coordinates
-		
 		if (pacOffsetX>redX)
 		{
 			if (pacOffsetY>redY)
