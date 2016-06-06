@@ -26,3 +26,65 @@ public abstract class Ghost extends Entity {
 		
 	}
 }
+
+
+
+ENTITY CLASS METHODS
+
+
+ public void turnRight(){
+    	dir=Direction.RIGHT;
+    	move(dir);
+    }
+    public void turnLeft(){
+    	dir=Direction.LEFT;
+    	move(dir);
+    }
+    
+    public boolean clearFront(){
+    	int[] index=new int[2];
+    	index=getMapLocation(x,y);
+    	if (GameHandler.map[index[0]][index[1]-1]==0){
+    		return true;
+    	}
+    	return false;
+    }
+    
+    public boolean clearRight(){
+    	int[] index=new int[2];
+    	index=getMapLocation(x,y);
+    	if (GameHandler.map[index[0]+1][index[1]]==0){
+    		return true;
+    	}
+    	return false;
+    }
+    
+    public boolean clearLeft(){
+    	int[] index=new int[2];
+    	index=getMapLocation(x,y);
+    	if (GameHandler.map[index[0]-1][index[1]]==0){
+    		return true;
+    	}
+    	return false;
+    }
+    
+    
+    public float[] getLocation(float x,float y){
+  	  float[] location=new float[2];
+  	  location[0]=x;
+        location[1]=y;
+  	  return location;
+    }
+    
+    public int[] getMapLocation(float x, float y){
+  	  int xIndex; 
+  	  int yIndex;
+  	  
+  	  xIndex=(int)x/16;
+  	  yIndex=(int)y/16;
+  	  
+  	  int[]mapLocation=new int[2];
+  	  mapLocation[0]=xIndex;
+  	  mapLocation[1]=yIndex;
+  	  return mapLocation;
+    }
