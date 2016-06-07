@@ -13,10 +13,11 @@ import pac.man.engine.GameHandler;
  */
 public abstract class State {
 
-    protected static States state;
+    protected States state;
     
     public enum States{
-        GAME;
+        GAME,
+    	MENU;
     }
     
     public abstract void getInput();
@@ -29,6 +30,11 @@ public abstract class State {
     
     public static void switchState(States state){
         GameHandler.state = state;
+    }
+    
+    public State(States state)
+    {
+    	this.state = state;
     }
     
 }

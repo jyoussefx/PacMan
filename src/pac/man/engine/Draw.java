@@ -1,5 +1,5 @@
 /**
- * Draw.java		May 11, 2016, 11:26:38 AM
+ * Draw.java        May 11, 2016, 11:26:38 AM
  */
 package pac.man.engine;
 
@@ -35,7 +35,7 @@ import org.newdawn.slick.opengl.TextureLoader;
  */
 public class Draw {
     
-    private static Texture[] tex = new Texture[1];
+    private static Texture[] tex = new Texture[3];
     
     
     public static void rect(float x, float y, float sx, float sy, int texx, int texy, int texID) {
@@ -93,6 +93,8 @@ public class Draw {
     public static void loadTextures() {
         try {
             tex[0] = TextureLoader.getTexture("PNG", new FileInputStream(new File("res/filler.png")));
+            tex[1] = TextureLoader.getTexture("PNG", new FileInputStream(new File("res/all_tiles.png")));
+            tex[2] = TextureLoader.getTexture("PNG", new FileInputStream(new File("res/nesfont.png")));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -102,13 +104,13 @@ public class Draw {
     
     
     public static void cRect(float x, float y, int sx, int sy, float r, float g, float b){
-    	glPushMatrix();{
+        glPushMatrix();{
              glDisable(GL_TEXTURE_2D);
 
-    	    
-    		 glTranslatef((int) x, (int) y, 0);
-    		 
-    		 glBegin(GL_QUADS);
+            
+             glTranslatef((int) x, (int) y, 0);
+             
+             glBegin(GL_QUADS);
              { 
                  
                  glColor3f(r/255,g/255,b/255);
@@ -119,7 +121,6 @@ public class Draw {
                  
              }
              glEnd();
-    	}
+        }
     }
 }
-
