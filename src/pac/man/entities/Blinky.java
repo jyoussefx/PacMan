@@ -35,8 +35,8 @@ public class Blinky extends Ghosts{
 		float pacX=pacLoc[0];
 		float pacY=pacLoc[1];
 		
-		int[] pacIndex=new int[2];
-		pacIndex=GameHandler.getIndex(GameHandler.pac);
+		// ERRORS int[] pacIndex=new int[2];
+		//pacIndex=GameHandler.getIndex(GameHandler.pac);
 		
 		//compare locations
 		if(isDecision()){
