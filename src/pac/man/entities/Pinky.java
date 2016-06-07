@@ -18,13 +18,15 @@ public class Pinky extends Entity{
 	public Pinky(int x, int y){
 		this.x = x;
         this.y = y;
+        sx = 14;
+		sy = 14;
 	}
 
 	@Override
 	public void update() {
 		//pull pacman location
 		float[] pacLoc=new float[2];
-		pacLoc=GameHandler.getPac();
+		pacLoc=GameHandler.getLoc(GameHandler.pac);
 		
 		float pacX=pacLoc[0];
 		float pacY=pacLoc[1];
@@ -48,6 +50,12 @@ public class Pinky extends Entity{
 
 	public void setY(int y){
 		/*sets y to new val*/
+	}
+
+	@Override
+	public void render() {
+		// TODO Auto-generated method stub
+		
 	}
 
 

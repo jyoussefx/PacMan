@@ -46,6 +46,7 @@ public abstract class Ghosts extends Entity {
 		float distance1;
 		float distance2;
 		float distance3;
+		return target;
 		
 		
 	}
