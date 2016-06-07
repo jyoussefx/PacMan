@@ -4,6 +4,7 @@
 package pac.man.entities;
 
 import pac.man.engine.GameHandler;
+import pac.man.engine.Renderable;
 
 /**
  * Represents things that move or are on the screen
@@ -11,7 +12,7 @@ import pac.man.engine.GameHandler;
  * @author Aaron Roy
  * @version 0.0.1.0
  */
-public abstract class Entity {
+public abstract class Entity implements Renderable{
     protected float x;
     protected float y;
     protected float sx;
@@ -30,8 +31,6 @@ public abstract class Entity {
     
     public static Direction dir = Direction.NONE;
     
-    public abstract void update();
-    public abstract void render();
     public Type getID(){
         return id;
     }

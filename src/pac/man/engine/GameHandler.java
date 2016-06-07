@@ -13,6 +13,7 @@ import pac.man.entities.Pellet;
 import pac.man.entities.Entity.Direction;
 import pac.man.entities.Inky;
 import pac.man.entities.PacMan;
+import pac.man.map.Map;
 import pac.man.map.Tile;
 import pac.man.map.TileID;
 
@@ -27,7 +28,7 @@ import pac.man.states.State.States;
  * @author Aaron Roy
  * @version 
  */
-public class GameHandler {
+public class GameHandler implements Playable{
 
 
     
@@ -48,11 +49,20 @@ public class GameHandler {
     //public Tile test;
     
     //TODO tile map
-    public static int[][] map=new int[8][8];
+    public static int[][] map= {{ 9,13,13,13,13,13,13,10},
+                                {16, 0, 0, 0, 0, 0, 0,14},
+                                {16, 0, 0, 0, 0, 0, 0,14},
+                                {16, 0, 0, 0, 0, 0, 0,14},
+                                {16, 0, 0, 0, 0, 0, 0,14},
+                                {16, 0, 0, 0, 0, 0, 0,14},
+                                {16, 0, 0, 0, 0, 0, 0,14},
+                                {12,15,15,15,15,15,15,11}};
     //TODO entity map
     public static int[][] entityMap=new int[8][8];
 
-    
+    /**
+     * 
+     */
     public GameHandler(){
        Draw.loadTextures();
        
@@ -61,40 +71,11 @@ public class GameHandler {
       
        state = States.GAME;
        
-        
-       //Loads empty map with border into array
-       for(int i:map[0]){
-    	   if (i==0)
-    		   map[0][i]=1;
-    	   else if (i==map.length)
-    		   map[0][i]=2;
-    	   else
-    		   map[0][i]=5;
-       }
-       
-       for(int i:map[map.length-1]){
-    	   if (i==0)
-    		   map[0][i]=3;
-    	   else if (i==map.length-1)
-    		   map[0][i]=4;
-    	   else
-    		   map[0][i]=5;
-       }
-       
-       for (int i=0;i<map.length-1;i++){
-    	   map[i][0]=6;
-    	   map[i][map.length-1]=6;
-       }
-       
-       //test = new Tile(0,0, TileID.BLANK);
-       
+              
        //Loads empty entity map and subs in entity positions
        int pacIndex[]=new int[2];
        pacIndex=game.getPac().getMapLocation(game.getPac().getX(), game.getPac().getY());
-       entityMap[pacIndex[0]][pacIndex[1]]=1;
-       
-       //draws tiles
-       
+       entityMap[pacIndex[0]][pacIndex[1]]=1;       
     }
     
     /**

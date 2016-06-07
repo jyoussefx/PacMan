@@ -8,6 +8,9 @@ package pac.man.states;
 import pac.man.entities.BigPellet;
 import pac.man.entities.PacMan;
 import pac.man.entities.Pellet;
+import pac.man.map.Map;
+import pac.man.map.Tile;
+import pac.man.map.TileID;
 
 /**
  * The Game state
@@ -19,12 +22,22 @@ public class Game extends State {
 
 	public static PacMan pac;
 	
+    public static Map realMap;
+    
+    public Tile test;
+
+	
     public Pellet[] pellets = new Pellet[25];
 	
 	public Game()
 	{
 		super(States.GAME);
         pac = new PacMan(16,16);
+        
+        test=new Tile(8*9, 8*9, TileID.CORNER_DR);
+        
+        realMap = new Map("res/Map");
+
         
         for (int i=0; i<25; i++)
         {
@@ -50,6 +63,7 @@ public class Game extends State {
 				pellets[i].eat();
 			}
 		}
+        test.setType(TileID.CORNER_DL);
 		
 		
 		
@@ -64,6 +78,8 @@ public class Game extends State {
 		{
 			pellets[i].render();
 		}
+        realMap.render();
+//        test.render();
 	
 		
 	}
