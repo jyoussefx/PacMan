@@ -13,6 +13,7 @@ import pac.man.engine.Draw;
  * The main character, duh
  *
  * @author Aaron Roy
+ * @author Jason Chan
  * @version 0.0.1.0
  */
 public class PacMan extends Entity{
@@ -68,6 +69,13 @@ public class PacMan extends Entity{
     public void render() {
         Draw.rect(x, y, sx, sy, 0, 0, 16, 16, 0);
         
+    }
+    
+    //After Pacman eats a power pellet, for a timer of ~3 seconds, he will be in an invincible mode 
+    //Signaling to the ghosts to enter their vulnerable mode 
+    public void goInvulnerable()
+    {
+    	
     }
     
 }

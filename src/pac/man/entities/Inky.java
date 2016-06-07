@@ -1,7 +1,11 @@
+/**
+ * Inky.java		June 2, 2016, 11:17:02 AM
+ */
 package pac.man.entities;
 
 import pac.man.engine.Draw;
 import pac.man.engine.GameHandler;
+import pac.man.entities.Entity.Direction;
 
 /**
  * The blue ghost.
@@ -9,10 +13,13 @@ import pac.man.engine.GameHandler;
  * @author Jason Chan
  *
  */
-public class Inky extends Entity {
+public class Inky extends Ghosts {
 
-// He needs Pac-Man's current tile/orientation and Blinky's current tile to calculate
-// his final target. To envision Inky's target, imagine an intermediate offset two tiles 
+/* He needs Pac-Man's current tile/orientation and Blinky's current tile to calculate
+   his final target. */
+	
+	
+// an intermediate offset two tiles 
 // away from Pac-Man's tile in the direction Pac-Man is moving (shown as the dashed, green
 // tile in the picture above), then draw a line from Blinky's tile to that offset. Now 
 // double the line length by extending the line out just as far again, and you will have 
@@ -33,7 +40,6 @@ public class Inky extends Entity {
 		this.y = y;
 		sx = 14;
 		sy = 14;
-		
 	}
 	
 	public void render() {
@@ -60,7 +66,86 @@ public class Inky extends Entity {
 		
 		float redX=redLoc[0];
 		float redY=redLoc[1];
-		//compare locations
+		
+		
+		//calculate Blinky's offset 
+		
+		
+		float blueTargetX = 0;
+		float blueTargetY = 0;
+		float pacOffsetX = 0;
+		float pacOffsetY = 0;
+		
+		if (PacMan.dir==Direction.LEFT)//if pacman is facing left
+		{pacOffsetX = pacX-2;
+		pacOffsetY= pacY;}
+		else if (PacMan.dir==Direction.RIGHT)//else if pacman is facing right
+		{pacOffsetX = pacX+2;
+		pacOffsetY= pacY;}
+		else if (PacMan.dir==Direction.DOWN)//else if pacman is facing down
+		{pacOffsetX = pacX;
+		pacOffsetY= pacY-2;}
+		else if (PacMan.dir==Direction.UP)//else if pacman is facing up
+		{pacOffsetX = pacX-2;
+		pacOffsetY= pacY+2;}
+		
+		
+		
+		// Calculate actual target's coordinates
+		if (pacOffsetX>redX)
+		{
+			if (pacOffsetY>redY)
+			{
+				blueTargetX=pacOffsetX+Math.abs(pacOffsetX-redX);
+				blueTargetY=pacOffsetY+Math.abs(pacOffsetY-redY);
+			}
+			else if (pacOffsetY<redY)
+			{
+				blueTargetX=pacOffsetX+Math.abs(pacOffsetX-redX);
+				blueTargetY=pacOffsetY-Math.abs(pacOffsetY-redY);
+			}
+			else //pacOffsetY==redY
+			{
+				blueTargetX=pacOffsetX+Math.abs(pacOffsetX-redX);
+				blueTargetY=pacOffsetY;
+			}	
+		}
+		else if (pacOffsetX<redX)
+		{
+			if (pacOffsetY>redY)
+			{
+				blueTargetX=pacOffsetX-Math.abs(pacOffsetX-redX);
+				blueTargetY=pacOffsetY+Math.abs(pacOffsetY-redY);
+			}
+			else if (pacOffsetY<redY)
+			{
+				blueTargetX=pacOffsetX-Math.abs(pacOffsetX-redX);
+				blueTargetY=pacOffsetY-Math.abs(pacOffsetY-redY);
+			}
+			else //pacOffsetY==redY
+			{
+				blueTargetX=pacOffsetX-Math.abs(pacOffsetX-redX);
+				blueTargetY=pacOffsetY;
+			}
+		}
+		else //pacOffsetX==redX
+		{
+			if (pacOffsetY>redY)
+			{
+				blueTargetX=pacOffsetX;
+				blueTargetY=pacOffsetY+Math.abs(pacOffsetY-redY);
+			}
+			else if (pacOffsetY<redY)
+			{
+				blueTargetX=pacOffsetX;
+				blueTargetY=pacOffsetY-Math.abs(pacOffsetY-redY);
+			}
+			else //pacOffsetY==redY
+			{
+				blueTargetX=pacOffsetX;
+				blueTargetY=pacOffsetY;
+			}
+		}
 		
 		//choose move
 		
