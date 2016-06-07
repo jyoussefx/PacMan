@@ -5,6 +5,7 @@ package pac.man.entities;
 
 import pac.man.engine.Draw;
 import pac.man.engine.GameHandler;
+import pac.man.entities.Entity.Direction;
 
 /**
  * The pink ghost attempts to be 4 places before PacMan,
@@ -37,7 +38,7 @@ public class Pinky extends Ghosts{
 			pinkyTargetX = pacX -4;
 		else if (PacMan.dir == Direction.RIGHT)
 			pinkyTargetX = pacX +4;
-		else if (PacMan.dir == Direction.UP){
+		else if (PacMan.dir == Direction.UP){ //*BUG* moves up and left//
 			pinkyTargetX = pacX -4;
 			pinkyTargetY = pacY +4;
 		}
@@ -47,7 +48,10 @@ public class Pinky extends Ghosts{
 
 	}
 
-
+	@Override
+	public void render(){
+			// TODO Auto-generated method stub
+	}
 
 }
 
