@@ -19,9 +19,14 @@ public abstract class Ghosts extends Entity {
 	@Override
 	public void update() {
 		// TODO Auto-generated method stub
-
+		
 	}
 
+	public void renderGhostEyes()
+	{
+		
+		
+	}
 	/* (non-Javadoc)
 	 * @see pac.man.entities.Entity#render()
 	 */
@@ -42,7 +47,7 @@ public abstract class Ghosts extends Entity {
 		return false;
 	}
 	
-	public int[] calcChoice(int[] tile1, int [] tile2, int[] tile3, int[] target){
+	public int[] calcChoice(int[] tile1, int[] tile2, int[] tile3, int[] target){
 		float distance1;
 		float distance2;
 		float distance3;
