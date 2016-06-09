@@ -37,8 +37,6 @@ import org.lwjgl.opengl.DisplayMode;
  * Initializes stuff
  * 
  * @author Aaron Roy
- * @version 0.0.1.0
- * 
  */
 public class Main {
 
@@ -119,7 +117,6 @@ public class Main {
         glLoadIdentity();
 
         gamehandler.render();
-        TextHandler.render();
 
         Display.update();   //updates the display with the changes
         Display.sync(60);   //makes up for lost time

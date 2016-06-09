@@ -5,6 +5,9 @@
  */
 package pac.man.states;
 
+import org.lwjgl.input.Keyboard;
+
+import pac.man.engine.TextHandler;
 import pac.man.entities.BigPellet;
 import pac.man.entities.PacMan;
 import pac.man.entities.Pellet;
@@ -28,6 +31,10 @@ public class Game extends State {
 
 	
     public Pellet[] pellets = new Pellet[25];
+
+    private boolean paused = false;
+
+    private boolean wasPaused;
 	
 	public Game()
 	{
@@ -36,7 +43,7 @@ public class Game extends State {
         
         test=new Tile(8*9, 8*9, TileID.CORNER_DR);
         
-        realMap = new Map("res/Map");
+        realMap = new Map("res/Maze");
 
         
         for (int i=0; i<25; i++)
@@ -45,27 +52,35 @@ public class Game extends State {
         	if (i==7) pellets[i] = new BigPellet(i*8, i*8, 6, 6);
         	else pellets[i] = new Pellet(i*8, i*8, 2, 2);
         }
+        TextHandler.clear();
+        TextHandler.write("Paused", 88, 140);
 	}
 	
 	@Override
 	public void getInput() {
-		pac.getInput();
+		if(!paused)pac.getInput();
 		
+		if(Keyboard.isKeyDown(Keyboard.KEY_P) && !wasPaused){
+		    paused = !paused;
+		    pac.stop();
+		}
+		
+		wasPaused = Keyboard.isKeyDown(Keyboard.KEY_P);
 	}
 
 	@Override
 	public void update() {
-		pac.update();
-		
-		for (int i=0; i<25; i++)
-		{
-			if (pellets[i].getArea().intersects(pac.area)){
-				pellets[i].eat();
-			}
-		}
-        test.setType(TileID.CORNER_DL);
-		
-		
+	    if(!paused){
+	        pac.play();
+	        pac.update();
+
+	        for (int i=0; i<25; i++)
+	        {
+	            if (pellets[i].getArea().intersects(pac.area)){
+	                pellets[i].eat();
+	            }
+	        }
+	    }		
 		
 		
 	}
@@ -80,6 +95,8 @@ public class Game extends State {
 		}
         realMap.render();
 //        test.render();
+        
+        if(paused)TextHandler.render();
 	
 		
 	}

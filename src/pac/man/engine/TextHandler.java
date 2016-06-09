@@ -7,7 +7,7 @@ import java.util.ArrayList;
  * NOTE: class is only referenced statically
  * 
  * @author Andrew Faulkenberry
- * @version 
+ * @author Aaron Roy
  */
 
 
@@ -20,8 +20,8 @@ public class TextHandler {
 	
 	static ArrayList<String> strings = new ArrayList<>();
  	
- 	static final int HORIZ_SCALE = 16;
- 	static final int VERT_SCALE = 16;
+ 	static final int HORIZ_SCALE = 8;
+ 	static final int VERT_SCALE = 8;
 	
 	public TextHandler()
 	{
@@ -46,14 +46,14 @@ public class TextHandler {
 	}
 	
 	/**
-	 * Prints a given string on-screen at a specified point, in a standard 16 pt font
+	 * Prints a given string on-screen at a specified point, in a standard 8 pt font
 	 * @param s The string to be written
 	 * @param bottomLeftCornerX The bottom-left horizontal coordinate
 	 * @param bottomLeftCornerY The bottom-left vertical coordinate
 	 */
-	public static void write(String s, int topLeftCornerX, int topLeftCornerY) 
+	public static void write(String s, int bottomLeftCornerX, int bottomLeftCornerY) 
 	{
-		write(s, topLeftCornerX, topLeftCornerY, 16);
+		write(s, bottomLeftCornerX, bottomLeftCornerY, 8);
 	}
 	
 	/**
@@ -72,7 +72,7 @@ public class TextHandler {
 				int pt = fontSizes.get(index);
 				
 				
-				for (int i=0; i<letters.length; i++)
+				for (int j=0; j<letters.length; j++)
 				{
 					
 					/*
@@ -81,14 +81,7 @@ public class TextHandler {
 					 * If this is a result of error on my part (not LWJGL), let me know
 					 */
 					
-					if (index==0 && i==0)
-					{
-						Draw.rect(x-112, y-112, pt, pt, getTexX(letters[i]), getTexY(letters[i]), getTexX(letters[i]) + 16, getTexY(letters[i]) + 16, 0, 2);
-					} 
-					else
-					{
-						Draw.rect(x, y, pt, pt, getTexX(letters[i]), getTexY(letters[i]), getTexX(letters[i]) + 16, getTexY(letters[i]) + 16, 0, 2);
-					}
+						Draw.rect(x, y, pt, pt, getTexX(letters[j]), getTexY(letters[j]), getTexX(letters[j]) + HORIZ_SCALE, getTexY(letters[j]) + VERT_SCALE, 0, 2);
 					x+=pt;
 					
 				}
@@ -98,13 +91,13 @@ public class TextHandler {
 	
 	/**
 	 * 
-	 * @param s The character to be found on the texture file
+	 * @param c The character to be found on the texture file
 	 * @return The x-coordinate of the given character on the NES-font texture file 
 	 */
-	public static int getTexX(char s) {
+	public static int getTexX(char c) {
  		int texX = 0;
 
- 		switch (s) {
+ 		switch (c) {
  		case ' ':case '0':case '@':case 'P':case '`':case 'p':
  			texX = HORIZ_SCALE * 0;
  			break;
@@ -163,14 +156,14 @@ public class TextHandler {
 
 	/**
 	 * 
-	 * @param s The character to be found on the texture file
+	 * @param c The character to be found on the texture file
 	 * @return The y-coordinate of the given character on the NES-font texture file 
 	 */
- 	public static int getTexY(char s) {
+ 	public static int getTexY(char c) {
 
  		int texY = 0;
 
- 		switch (s) {
+ 		switch (c) {
  		//first row
  		case ' ':case '!':case '"':case '#':case '$':case '%':case '&':case '\'':
  		case '(':case ')':case '*':case '+':case ',':case '-':case '.':case '/':
@@ -225,7 +218,7 @@ public class TextHandler {
  	 * Erases a given word and replaces it with another word in the same location
  	 * @param erase The word to be replaced
  	 * @param replace The word with which the erased word is to be replaced
- 	 * @throws NonexistentStringExcpetion
+ 	 * @throws NonexistentStringException
  	 */
  	public static void overwrite(String erase, String replace) throws NonexistentStringException
  	{

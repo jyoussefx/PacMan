@@ -21,15 +21,15 @@ public abstract class Entity implements Renderable{
     protected Type id;
 
     
-    private float SPEED = 1.5f;
+    private float SPEED = 1;
     
     public enum Type{
         PACMAN, PELLET, BLINKY, INKY, PINKY, CLYDE, FRUIT;
     }
     
-    public enum Direction{UP, DOWN, LEFT, RIGHT, NONE;}
+    public enum Direction{UP, DOWN, LEFT, RIGHT;}
     
-    public static Direction dir = Direction.NONE;
+    public static Direction dir = Direction.LEFT;
     
     public Type getID(){
         return id;
@@ -67,7 +67,6 @@ public abstract class Entity implements Renderable{
             break;
         default:
             break;
-        
         }
         x += dx;
         y += dy;

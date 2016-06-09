@@ -7,6 +7,7 @@ import java.awt.Rectangle;
 
 import org.lwjgl.input.Keyboard;
 
+import pac.man.engine.Animation;
 import pac.man.engine.Draw;
 
 /**
@@ -19,12 +20,19 @@ import pac.man.engine.Draw;
 public class PacMan extends Entity{
     
     public Rectangle area;
+    public Animation pac;
 	
     public PacMan(int x, int y){
         this.x = x;
         this.y = y;
-        sx = 16;
-        sy = 16;
+        sx = 13;
+        sy = 13;
+        pac = new Animation(4, 2, sx, sy, 1);
+        
+        pac.add(58, 21);
+        pac.add(71, 21);
+        pac.add(84, 21);
+        pac.add(71, 21);
         
         this.area = new Rectangle(x, y, (int) sx, (int) sy);
        
@@ -67,15 +75,40 @@ public class PacMan extends Entity{
      */
     @Override
     public void render() {
-        Draw.rect(x, y, sx, sy, 0, 0, 16, 16, 0);
-        
+
+        switch (dir) {
+        case UP   :pac.play(x, y, 1); break;
+        case RIGHT:pac.play(x, y, 0); break;
+        case DOWN :pac.play(x, y, 3); break;
+        case LEFT :pac.play(x, y, 2); break;
+        default:
+            break;
+        }
     }
     
-    //After Pacman eats a power pellet, for a timer of ~3 seconds, he will be in an invincible mode 
-    //Signaling to the ghosts to enter their vulnerable mode 
+    /**
+     * After Pacman eats a power pellet, for a timer of ~3 seconds, 
+     * he will be in an invincible mode signaling to the ghosts to 
+     * enter their vulnerable mode
+     */
     public void goInvulnerable()
     {
     	
     }
+
+    /**
+     * Stops PacMan's animation
+     */
+    public void stop() {
+        pac.stop();        
+    }
+
+    /**
+     * Plays PacMan's animation
+     */
+    public void play() {
+        pac.resume();
+    }
+
     
 }

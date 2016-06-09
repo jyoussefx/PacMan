@@ -56,7 +56,7 @@ public class Map implements Renderable{
                     if(str[index].equals("")){
                         index++;
                     }
-                    tiles[i][j] =new Tile(j, i, 
+                    tiles[i][j] =new Tile(j, 36-rows+i, 
                             TileID.getTile(Integer.parseInt(str[index])));
                 }
             }

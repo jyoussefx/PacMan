@@ -12,7 +12,6 @@ public class BigPellet extends Pellet {
 	
 	public BigPellet(int x, int y, int sx, int sy) {
 		super(x, y, sx, sy);
-		// TODO Auto-generated constructor stub
 	}
 	
 	@Override
@@ -29,7 +28,7 @@ public class BigPellet extends Pellet {
     
     @Override
     public void render() {
-    	if (!isEaten) Draw.rect(x, y, sx, sy, 62, 16, 70, 24, 0, 1);
+    	if (!isEaten) Draw.rect(x, y, sx, sy, 58, 12, 60, 14, 0, 1);
         
     }
 
