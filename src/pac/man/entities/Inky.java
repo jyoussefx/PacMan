@@ -57,7 +57,7 @@ public class Inky extends Ghosts {
 		int[] pacIndex=new int[2];
 		pacIndex=GameHandler.getIndex(GameHandler.pac);
 		
-		// pull direction PacMan is facing (needs a dedicated method)
+		
 		
 		
 		// pull Blinky location

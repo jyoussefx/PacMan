@@ -19,6 +19,7 @@ import pac.man.engine.Draw;
  */
 public class PacMan extends Entity{
     
+    public boolean hunting=false;
     public Rectangle area;
     public Animation pac;
 	
@@ -65,7 +66,7 @@ public class PacMan extends Entity{
      * @see pac.man.entities.Entity#update()
      */
     @Override
-    public void update() {        
+    public void update() { 
     	move(dir);
     	area.setLocation((int) x, (int) y); 
     }

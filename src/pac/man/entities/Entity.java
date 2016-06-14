@@ -27,6 +27,7 @@ public abstract class Entity implements Renderable{
         PACMAN, PELLET, BLINKY, INKY, PINKY, CLYDE, FRUIT;
     }
     
+    public enum Mode{CHASE, SCATTER, FRIGHTENED;}
     public enum Direction{UP, DOWN, LEFT, RIGHT;}
     
     public static Direction dir = Direction.LEFT;
