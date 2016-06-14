@@ -11,14 +11,15 @@ public class Pellet extends Entity {
 	private Rectangle area;
 	
 	public Pellet(int x, int y, int sx, int sy) {
-		isEaten = false;
-		this.x = x;
-		this.y = y;
-		this.sx = sx;
-		this.sy = sy;
-		
-		this.area = new Rectangle(x, y, sx, sy);
+		super(x, y, sx, sy);
+	    isEaten = false;
 	}
+	
+   public Pellet(int x, int y) {
+        super(x, y, 2, 2);
+        isEaten = false;
+    }
+
 	
 	@Override
 	public void update() {
@@ -28,7 +29,7 @@ public class Pellet extends Entity {
 
 	@Override
 	public void render() {
-		if (!isEaten) Draw.rect(x, y, sx, sy, 58, 16, 60, 18, 0, 1);
+		if (!isEaten) Draw.rect(x, y, sx, sy, 58, 12, 60, 14, 0, 1);
 	}
 	
 	public void eat()

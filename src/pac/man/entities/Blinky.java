@@ -15,10 +15,7 @@ import pac.man.engine.GameHandler;
 public class Blinky extends Ghosts{
 	
 	public Blinky(int x, int y){
-		this.x = x;
-        this.y = y;
-        sx = 14;
-        sy = 14;
+	    super(x, y);
 	}
 
 	@Override

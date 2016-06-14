@@ -6,7 +6,9 @@
 package pac.man.states;
 
 import org.lwjgl.input.Keyboard;
+import org.w3c.dom.css.Counter;
 
+import pac.man.engine.Physics;
 import pac.man.engine.TextHandler;
 import pac.man.entities.BigPellet;
 import pac.man.entities.PacMan;
@@ -35,11 +37,13 @@ public class Game extends State {
     private boolean paused = false;
 
     private boolean wasPaused;
+
+    private int counter;
 	
 	public Game()
 	{
 		super(States.GAME);
-        pac = new PacMan(16,16);
+        pac = new PacMan(106,69);
         
         test=new Tile(8*9, 8*9, TileID.CORNER_DR);
         
@@ -49,7 +53,7 @@ public class Game extends State {
         for (int i=0; i<25; i++)
         {
      	   
-        	if (i==7) pellets[i] = new BigPellet(i*8, i*8, 6, 6);
+        	if (i==7) pellets[i] = new BigPellet(i*8, i*8);
         	else pellets[i] = new Pellet(i*8, i*8, 2, 2);
         }
         TextHandler.clear();
@@ -70,17 +74,27 @@ public class Game extends State {
 
 	@Override
 	public void update() {
-	    if(!paused){
+	    if(!paused && counter>240){
 	        pac.play();
 	        pac.update();
 
 	        for (int i=0; i<25; i++)
 	        {
-	            if (pellets[i].getArea().intersects(pac.area)){
+	            if (Physics.checkPlayer(pac, pellets[i])){
 	                pellets[i].eat();
 	            }
 	        }
 	    }		
+	    
+        TextHandler.clear();
+        if(paused)
+            TextHandler.write("Paused", 88, 140);
+        
+        if(counter <= 240){
+            TextHandler.write("READY", 88, 120);
+            counter++;
+        }
+
 		
 		
 	}
@@ -95,9 +109,7 @@ public class Game extends State {
 		}
         realMap.render();
 //        test.render();
-        
-        if(paused)TextHandler.render();
-	
+        TextHandler.render();
 		
 	}
 	

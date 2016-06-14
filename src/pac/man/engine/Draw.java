@@ -113,7 +113,7 @@ public class Draw {
             int imgX = tex[texID].getImageWidth();
             int imgY = tex[texID].getImageHeight();
             
-            glTranslatef((int) x, (int) y, 0);
+            glTranslatef(Math.round(x), Math.round(y), 0);
             glRotatef(rot*90,0,0,1);
             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);

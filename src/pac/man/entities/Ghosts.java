@@ -16,7 +16,18 @@ public abstract class Ghosts extends Entity {
 	 * @see pac.man.entities.Entity#update()
 	 */
 	
-	@Override
+	/**
+     * @param x
+     * @param y
+     * @param sx
+     * @param sy
+     * @param radius
+     */
+    public Ghosts(float x, float y) {
+        super(x, y, 14, 14);
+    }
+
+    @Override
 	public void update() {
 		// TODO Auto-generated method stub
 		

@@ -17,11 +17,28 @@ public abstract class Entity implements Renderable{
     protected float y;
     protected float sx;
     protected float sy;
-    float dx, dy;
+    protected float ox;
+    protected float oy;
+    protected float radius;
+    
+    protected float dx, dy;
     protected Type id;
 
     
-    private float SPEED = 1;
+    private float pacSpeed = 1;
+    private float ghostSpeed = 0.8f;
+    
+    public Entity(float x, float y, float sx, float sy){
+        this.x = x;
+        this.y = y;
+        this.sx = sx;
+        this.sy = sy;
+        radius = sx/2;
+        
+        ox = x+radius;
+        oy = y+radius;
+    }
+    
     
     public enum Type{
         PACMAN, PELLET, BLINKY, INKY, PINKY, CLYDE, FRUIT;
@@ -48,21 +65,25 @@ public abstract class Entity implements Renderable{
         return sy;
     }
     public void move(Direction dir){
+        float speed = 0;
+        if(this instanceof PacMan)speed = pacSpeed;
+        if(this instanceof Ghosts)speed = ghostSpeed;
+        
     	switch(dir){
         case DOWN:
-            dy=-SPEED;
+            dy=-speed;
             dx=  0;
             break;
         case LEFT:
-            dx=-SPEED;
+            dx=-speed;
             dy=0;
             break;
         case RIGHT:
-            dx=SPEED;
+            dx=speed;
             dy=0;
             break;
         case UP:
-            dy=SPEED;
+            dy=speed;
             dx=0;
             break;
         default:
@@ -70,6 +91,8 @@ public abstract class Entity implements Renderable{
         }
         x += dx;
         y += dy;
+        ox+= dx;
+        oy+= dy;
     }
     public void turnRight(){
     	dir=Direction.RIGHT;
@@ -127,5 +150,23 @@ public abstract class Entity implements Renderable{
   	  mapLocation[1]=yIndex;
   	  return mapLocation;
     }
+
+    /**
+     * Returns the radius
+     * 
+     * @return radius
+     */
+    public float getRadius() {
+        return radius;
+    }
+    
+    public float getOx() {
+        return ox;
+    }
+
+    public float getOy() {
+        return oy;
+    }
+
 
 }

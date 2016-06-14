@@ -8,10 +8,10 @@ public class BigPellet extends Pellet {
 
 	private boolean isEaten;
 	
-	private Rectangle area;
 	
-	public BigPellet(int x, int y, int sx, int sy) {
-		super(x, y, sx, sy);
+	public BigPellet(int x, int y) {
+		super(x, y, 8, 8);
+		System.out.println(radius);
 	}
 	
 	@Override
@@ -28,7 +28,7 @@ public class BigPellet extends Pellet {
     
     @Override
     public void render() {
-    	if (!isEaten) Draw.rect(x, y, sx, sy, 58, 12, 60, 14, 0, 1);
+    	if (!isEaten) Draw.rect(x, y, sx, sy, 62, 12, 70, 20, 0, 1);
         
     }
 

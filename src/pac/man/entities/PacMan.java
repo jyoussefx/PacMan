@@ -19,23 +19,18 @@ import pac.man.engine.Draw;
  */
 public class PacMan extends Entity{
     
-    public Rectangle area;
     public Animation pac;
 	
     public PacMan(int x, int y){
-        this.x = x;
-        this.y = y;
-        sx = 13;
-        sy = 13;
+        super(x, y, 13, 13);
         pac = new Animation(4, 2, sx, sy, 1);
         
         pac.add(58, 21);
         pac.add(71, 21);
         pac.add(84, 21);
         pac.add(71, 21);
+        pac.stop();
         
-        this.area = new Rectangle(x, y, (int) sx, (int) sy);
-       
     }
 
     public void getInput(){
@@ -59,6 +54,11 @@ public class PacMan extends Entity{
                         Keyboard.isKeyDown(Keyboard.KEY_DOWN) ||
                         Keyboard.isKeyDown(Keyboard.KEY_LEFT)))
             dir = Direction.RIGHT;
+        
+        
+        if(Keyboard.isKeyDown(Keyboard.KEY_L))
+            System.out.println("X: " + x+
+                               "Y: "+  y);
     }
     
     /* (non-Javadoc)
@@ -67,7 +67,6 @@ public class PacMan extends Entity{
     @Override
     public void update() {        
     	move(dir);
-    	area.setLocation((int) x, (int) y); 
     }
 
     /* (non-Javadoc)
