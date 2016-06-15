@@ -150,5 +150,5 @@ public class Inky extends Ghosts {
 		//choose move
 		
 		//execute
-		}
 	}
+}

@@ -36,7 +36,7 @@ public abstract class Ghosts extends Entity {
 		//orange
 		Draw.rect(119,151,14,14,0,68,14,64,0,1);
 		//red 
-		Draw.rect(105,122)
+		Draw.rect(105,147,14,14,0,26,14,12,0,1);
 	}
 	
 	
