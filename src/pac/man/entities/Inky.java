@@ -36,10 +36,7 @@ public class Inky extends Ghosts {
 //"head-faking". How much or how little effect this will have on Inky's decisions is 
 //directly related to where Blinky is at the time.
 	public Inky(int x, int y ){
-		this.x = x;
-		this.y = y;
-		sx = 14;
-		sy = 14;
+	    super(x, y);    
 	}
 	
 	public void render() {

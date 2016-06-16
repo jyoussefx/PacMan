@@ -45,21 +45,7 @@ public class GameHandler implements Playable{
     public static Menu menu;
 
     
-    Pellet pellet;
-    
-    //public Tile test;
-    
-    //TODO tile map
-    public static int[][] map= {{ 9,13,13,13,13,13,13,10},
-                                {16, 0, 0, 0, 0, 0, 0,14},
-                                {16, 0, 0, 0, 0, 0, 0,14},
-                                {16, 0, 0, 0, 0, 0, 0,14},
-                                {16, 0, 0, 0, 0, 0, 0,14},
-                                {16, 0, 0, 0, 0, 0, 0,14},
-                                {16, 0, 0, 0, 0, 0, 0,14},
-                                {12,15,15,15,15,15,15,11}};
-    //TODO entity map
-    public static int[][] entityMap=new int[8][8];
+    Pellet pellet;    
 
     /**
      * 
@@ -73,10 +59,6 @@ public class GameHandler implements Playable{
        state = States.GAME;
        
               
-       //Loads empty entity map and subs in entity positions
-       int pacIndex[]=new int[2];
-       pacIndex=game.getPac().getMapLocation(game.getPac().getX(), game.getPac().getY());
-       entityMap[pacIndex[0]][pacIndex[1]]=1;       
     }
     
     /**
@@ -138,19 +120,17 @@ public class GameHandler implements Playable{
     }
     
     public static float[] getLoc(Entity entity){
-    	return entity.getLocation(entity.getX(), entity.getY());
+    	return entity.getLocation();
     }
     
     public static int[] getIndex(Entity entity){
-    	return entity.getMapLocation(entity.getX(), entity.getY());
+    	return entity.getMapLocation();
     }
     
     public static Direction getDir(Entity entity){
     	return entity.dir;
     }
-    public static int[][] getTileMap(){
-    	return map;
-    }
+    
     
     public void switchStates(State.States s)
     {

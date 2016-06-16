@@ -8,17 +8,18 @@ public class Pellet extends Entity {
 	
 	private boolean isEaten;
 	
-	private Rectangle area;
 	
 	public Pellet(int x, int y, int sx, int sy) {
-		isEaten = false;
-		this.x = x;
-		this.y = y;
-		this.sx = sx;
-		this.sy = sy;
-		
-		this.area = new Rectangle(x, y, sx, sy);
+		super(x, y, sx, sy);
+	    isEaten = false;
 	}
+	
+   public Pellet(int x, int y) {
+        super(x, y, 2, 2);
+        isEaten = false;
+        radius = 4;
+    }
+
 	
 	@Override
 	public void update() {
@@ -36,10 +37,6 @@ public class Pellet extends Entity {
 		if (!isEaten) isEaten = true;
 	}
 	
-	public Rectangle getArea()
-	{
-		return area;
-	}
 	
 	public boolean isEaten()
 	{

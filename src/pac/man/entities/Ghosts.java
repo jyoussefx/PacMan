@@ -4,6 +4,8 @@
 package pac.man.entities;
 
 import pac.man.engine.GameHandler;
+import pac.man.map.TileID;
+import pac.man.states.Game;
 
 /**
  * Adds degree of separation for ghosts when dying and adds 4 modes
@@ -16,7 +18,18 @@ public abstract class Ghosts extends Entity {
 	 * @see pac.man.entities.Entity#update()
 	 */
 	
-	@Override
+	/**
+     * @param x
+     * @param y
+     * @param sx
+     * @param sy
+     * @param radius
+     */
+    public Ghosts(float x, float y) {
+        super(x, y, 14, 14);
+    }
+
+    @Override
 	public void update() {
 		// TODO Auto-generated method stub
 		
@@ -38,10 +51,11 @@ public abstract class Ghosts extends Entity {
 	
 	public boolean isDecision(){
 		int[] index=new int[2];
-		index=getMapLocation(x,y);
-		if(GameHandler.map[index[0]-1][index[1]]==0||
-			GameHandler.map[index[0]+1][index[1]]==0||
-			GameHandler.map[index[0]][index[1]-1]==0){
+		index=getMapLocation();
+		if(Game.realMap.getTileID(index[1],index[0]-1)==TileID.BLANK||
+		   Game.realMap.getTileID(index[1],index[0]+1)==TileID.BLANK||
+		   Game.realMap.getTileID(index[1]+1,index[0])==TileID.BLANK)
+		{
 			return true;
 		}
 		return false;

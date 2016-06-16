@@ -8,9 +8,11 @@ package pac.man.states;
 import java.util.ArrayList;
 
 import org.lwjgl.input.Keyboard;
+import org.w3c.dom.css.Counter;
 
 import pac.man.engine.HUD;
 import pac.man.engine.NonexistentStringException;
+import pac.man.engine.Physics;
 import pac.man.engine.TextHandler;
 import pac.man.entities.BigPellet;
 import pac.man.entities.Fruits;
@@ -49,13 +51,15 @@ public class Game extends State {
    
 
     private boolean wasPaused;
+
+    private int counter;
 	
 	public Game()
 	{
 	    
 		super(States.GAME);
-        pac = new PacMan(16,16);
         hud = new HUD(pac);
+        pac = new PacMan(106,68);
         
         test=new Tile(8*9, 8*9, TileID.CORNER_DR);
         
@@ -67,13 +71,13 @@ public class Game extends State {
         {
             for (int x=0;x<31; x++)
             {
-                if (tiles[x][y].getID()==TileID.BLANK)
+                if (tiles[x][y].getType()==TileID.BLANK)
                     
                     if ((x==7&&y==1) 
                       || (x==27&&y==1)
                       || (x==7&&y==26)
                       || (x==27&&y==26))
-                            pellets.add(new BigPellet(tiles[x][y].getX(), tiles[x][y].getY(),8,8));
+                            pellets.add(new BigPellet(tiles[x][y].getX(), tiles[x][y].getY()));
                     else if (!((x>10&&x<22&&!(y==6||y==21))
                             || (x==27&&!(y==6||y==12||y==15||y==21))))
                                 pellets.add(new Pellet(tiles[x][y].getX()+3, tiles[x][y].getY()+3, 2, 2));
@@ -89,6 +93,7 @@ public class Game extends State {
 	@Override
 	public void getInput() {
 		if(!paused)pac.getInput();
+		realMap.getInput();
 		
 		if(Keyboard.isKeyDown(Keyboard.KEY_P) && !wasPaused){
 		    TextHandler.clear();
@@ -113,7 +118,7 @@ public class Game extends State {
 
 	@Override
 	public void update() {
-	    if(!paused){
+	    if(!paused && counter>240){
 	        pac.play();
 	        pac.update();
 	        
@@ -122,7 +127,7 @@ public class Game extends State {
 	        for (Pellet p: pellets)
 	        {
 	            
-	            if (p.getArea().intersects(pac.area) && !p.isEaten()){
+	            if (Physics.checkPlayer(pac, p) && !p.isEaten()){
 	                p.eat();
 	                pac.prevScore = pac.score;
 	                if (p.isBig()) {
@@ -158,7 +163,7 @@ public class Game extends State {
 	        
 	        if (fruitTimer<=0 && !hasFruit) spawnFruit();
 	        
-	        if (hasFruit && pac.area.intersects(fruit.area) &!fruit.isEaten()) 
+	        if (hasFruit && Physics.checkPlayer(pac, fruit) &!fruit.isEaten()) 
 	            {
 	                fruit.eat();
 	                pac.prevScore=pac.score;
@@ -184,6 +189,16 @@ public class Game extends State {
 	        
 	        //if (noMorePellets) level++;
 	    }		
+	    
+        TextHandler.clear();
+        if(paused)
+            TextHandler.write("Paused", 88, 140);
+        
+        if(counter <= 240){
+            TextHandler.write("READY", 88, 120);
+            counter++;
+        }
+
 		
 	}
 
@@ -224,5 +239,9 @@ public class Game extends State {
 	    fruitTimer = 100;
 	    hasFruit = false;
 	}
+    
+	public static Map getTileMap(){
+        return realMap;
+    }
 	
 }
