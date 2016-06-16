@@ -1,10 +1,11 @@
-package pac.man.states;
+package pac.man.entities;
 
 import java.awt.Rectangle;
 
 import pac.man.engine.Draw;
 import pac.man.entities.Entity;
 import pac.man.entities.Fruits;
+import pac.man.states.Game;
 
 public class Fruit extends Entity{
 
@@ -19,7 +20,7 @@ public class Fruit extends Entity{
         super(x, y, Fruit.getSx(type), Fruit.getSy(type));
         this.type = type;
                 
-        counter = 100;
+        counter = (int)Math.random()*60+540;
     }
     @Override
     public void update() {
@@ -28,13 +29,11 @@ public class Fruit extends Entity{
             isEaten=true;
             Game.removeFruit();
         }
-        
-        System.out.println(counter);
-        
+                
     }
     @Override
     public void render() {
-        if (!isEaten) Draw.rect(x, y, Fruit.getSx(type), Fruit.getSy(type), Fruit.getTexX(type), Fruit.getTexY(type), Fruit.getTexX(type) + (Fruit.getSx(type)*3), Fruit.getTexY(type) + (Fruit.getSy(type)*3), 1);
+        if (!isEaten) Draw.rect(x, y, Fruit.getSx(type), Fruit.getSy(type), Fruit.getTexX(type), Fruit.getTexY(type), Fruit.getTexX(type) + (Fruit.getSx(type)), Fruit.getTexY(type) + (Fruit.getSy(type)), 1);
         
     }
     
@@ -95,7 +94,6 @@ public class Fruit extends Entity{
     public void eat()
     {
         if (!isEaten) isEaten = true;
-        System.out.println(isEaten);
     }
     
     public boolean isEaten()

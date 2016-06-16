@@ -117,40 +117,53 @@ public abstract class Entity implements Renderable{
     }
     
     public boolean clearTop(){
-        int[] index=getMapLocation();
-        System.out.println(Game.realMap.getTileID(index[1], index[0]));
+        int[] index=getMapLocation(Direction.UP);
+        fixBounds(index);
+//        System.out.println(Game.realMap.getTileID(index[1], index[0]));
         if (Game.realMap.getTileID(index[1], index[0])==TileID.BLANK){
-            return true;
+            return true && (int)getOx() == getCenterX();
         }
     	return false;
     }
     
     public boolean clearBottom(){
-        int[] index=getMapLocation();
-        System.out.println(Game.realMap.getTileID(index[1]-1, index[0]));
-        if (Game.realMap.getTileID(index[1]-1, index[0])==TileID.BLANK){
-            return true;
+        int[] index={getMapLocation(Direction.DOWN)[0], getMapLocation(Direction.DOWN)[1]-2};
+        fixBounds(index);
+//        System.out.println(Game.realMap.getTileID(index[1]-1, index[0]));
+        if (Game.realMap.getTileID(index[1], index[0])==TileID.BLANK){
+            return true && (int)getOx() == getCenterX();
         }
         return false;
     }
 
     
     public boolean clearRight() throws ArrayIndexOutOfBoundsException{
-        int[] index=getMapLocation();
-        System.out.println(Game.realMap.getTileID(index[1]-1, index[0]+1));
-        if (Game.realMap.getTileID(index[1]-1, index[0]+1)==TileID.BLANK){
-            return true;
+        int[] index={getMapLocation(Direction.RIGHT)[0]+1, getMapLocation(Direction.RIGHT)[1]-1};
+        fixBounds(index);
+//        System.out.println(Game.realMap.getTileID(index[1]-1, index[0]+1));
+        if (Game.realMap.getTileID(index[1], index[0])==TileID.BLANK){
+            return true && (int)getOy() == getCenterY();
         }
     	return false;
     }
     
     public boolean clearLeft(){
-    	 int[] index=getMapLocation();
-         System.out.println(Game.realMap.getTileID(index[1]-1, index[0]-1));
-    	if (Game.realMap.getTileID(index[1]-1, index[0]-1)==TileID.BLANK){
-    		return true;
+    	 int[] index= {getMapLocation(Direction.LEFT)[0]-1, getMapLocation(Direction.LEFT)[1]-1};
+    	 fixBounds(index);
+//         System.out.println(Game.realMap.getTileID(index[1]-1, index[0]-1));
+    	if (Game.realMap.getTileID(index[1], index[0])==TileID.BLANK){
+    		return true && (int)getOy() == getCenterY();
     	}
     	return false;
+    }
+    
+    public void fixBounds(int[] fix){
+        if(fix[0] < 0){
+            fix[0] = Game.realMap.getWidth()-1;
+        }
+        if(fix[0] >= Game.realMap.getWidth()){
+            fix[0] = 0;
+        }
     }
     
     
@@ -161,9 +174,34 @@ public abstract class Entity implements Renderable{
   	  return location;
     }
     
-    public int[] getMapLocation(){  
-  	  int xIndex=(int)(ox/8);
-  	  int yIndex=(int)(oy/8);
+    public int[] getMapLocation(Direction newDir){  
+      float x = 0;
+      float y = 0;
+      
+      switch(newDir){
+    case DOWN:
+        x = ox;
+        y = oy+3;
+        break;
+    case LEFT:
+        x = ox+3;
+        y = oy;
+        break;
+    case RIGHT:
+        x = ox-4;
+        y = oy;
+        break;
+    case UP:
+        x = ox;
+        y = oy-4;
+        break;
+    default:
+        break;
+          
+      }
+        
+  	  int xIndex=(int)(x/8);
+  	  int yIndex=(int)((y)/8);
   	  
   	  int[]mapLocation= {xIndex, yIndex-1};
   	  return mapLocation;
@@ -185,6 +223,15 @@ public abstract class Entity implements Renderable{
     public float getOy() {
         return oy;
     }
+    
+    public int getCenterX(){
+        return ((int)ox/8)*8+4;
+    }
+    
+    public int getCenterY(){
+        return ((int)oy/8)*8+4;
+    }
+
 
     /**
      * Returns the direction this entity is moving
@@ -196,6 +243,7 @@ public abstract class Entity implements Renderable{
     public void setX(float i)
     {
         this.x = i;
+        ox = i+radius-1;
     }
 
 

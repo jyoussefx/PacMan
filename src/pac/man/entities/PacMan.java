@@ -26,6 +26,7 @@ public class PacMan extends Entity{
     public int prevScore;
 	
 	private boolean up, down, left, right;
+	private boolean isEating;
     
     
     public PacMan(int x, int y){
@@ -77,7 +78,7 @@ public class PacMan extends Entity{
      */
     @Override
     public void update() {
-    	move(dir);
+    	if(!isEating)move(dir);
 //    	System.out.println(Game.realMap.getTileID(getMapLocation()[1], getMapLocation()[0]));
     }
 
@@ -95,7 +96,6 @@ public class PacMan extends Entity{
         default:
             break;
         }
-        Draw.rect(ox, oy, 1, 1, 70, 5, 0, 1);
     }
     
     /**
@@ -119,6 +119,8 @@ public class PacMan extends Entity{
         }else{
             play();
         }
+        if (x<-13) setX(x+237);
+        if (x>224) setX(x-237);
         
     }
     
@@ -139,7 +141,18 @@ public class PacMan extends Entity{
     
     public void reset(){
         x=106;
-        y=68;
+        y=71;
+        ox = x+radius-1;
+        oy = y+radius-1;
     }
+    
+    public boolean isEating(){
+        return isEating;
+    }
+    
+    public void  setEating(boolean e){
+        isEating = e;
+    }
+
         
 }

@@ -3,6 +3,8 @@
  */
 package pac.man.entities;
 
+import pac.man.engine.Animation;
+import pac.man.engine.Draw;
 import pac.man.engine.GameHandler;
 import pac.man.map.TileID;
 import pac.man.states.Game;
@@ -14,10 +16,9 @@ import pac.man.states.Game;
  */
 public abstract class Ghosts extends Entity {
 
-	/* (non-Javadoc)
-	 * @see pac.man.entities.Entity#update()
-	 */
 	
+    protected Animation ani;
+    
 	/**
      * @param x
      * @param y
@@ -27,13 +28,13 @@ public abstract class Ghosts extends Entity {
      */
     public Ghosts(float x, float y) {
         super(x, y, 14, 14);
+        
+        ani = new Animation(4, 4, 14, 14, 1);
+        ani.add(0, getTexY());
+        ani.add(14, getTexY());
+        ani.add(28, getTexY());
+        ani.add(42, getTexY());
     }
-
-    @Override
-	public void update() {
-		// TODO Auto-generated method stub
-		
-	}
 
 	public void renderGhostEyes()
 	{
@@ -45,13 +46,13 @@ public abstract class Ghosts extends Entity {
 	 */
 	@Override
 	public void render() {
-		// TODO Auto-generated method stub
-
+	    ani.play(x, y);
+	    renderGhostEyes();
 	}
 	
 	public boolean isDecision(){
 		int[] index=new int[2];
-		index=getMapLocation();
+		index=getMapLocation(dir);
 		if(Game.realMap.getTileID(index[1],index[0]-1)==TileID.BLANK||
 		   Game.realMap.getTileID(index[1],index[0]+1)==TileID.BLANK||
 		   Game.realMap.getTileID(index[1]+1,index[0])==TileID.BLANK)
@@ -75,6 +76,23 @@ public abstract class Ghosts extends Entity {
 	
 		//*Start*InBox in beginning of Game will need to be different for each Ghost 
 		//because Red is never in box and Clyde is always last
+	}
+	
+	/**
+	 * 
+	 * @return the correct texx of the ghost
+	 */
+	public int getTexY(){
+	    if(this instanceof Blinky){
+	        return 12;
+	    }else if(this instanceof Pinky){
+	        return 26;
+	    }else if(this instanceof Inky){
+	        return 40;
+        }else if(this instanceof Clyde){
+            return 54;
+        }
+	    return 12;
 	}
 
 }

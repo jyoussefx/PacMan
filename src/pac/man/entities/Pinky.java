@@ -44,7 +44,7 @@ public class Pinky extends Ghosts{
 		else if (PacMan.dir == Direction.DOWN)
 			pinkyTargetY = pacY -4;
 
-
+		move(dir);
 	}
 
 	@Override

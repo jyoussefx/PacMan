@@ -6,6 +6,7 @@ package pac.man.entities;
 import pac.man.engine.Draw;
 import pac.man.engine.GameHandler;
 import pac.man.entities.Entity.Direction;
+import pac.man.states.Game;
 
 /**
  * The blue ghost.
@@ -59,7 +60,7 @@ public class Inky extends Ghosts {
 		
 		// pull Blinky location
 		float[] redLoc=new float[2];
-		redLoc=GameHandler.getLoc(GameHandler.red);
+		redLoc=GameHandler.getLoc(Game.red);
 		
 		float redX=redLoc[0];
 		float redY=redLoc[1];
@@ -147,5 +148,6 @@ public class Inky extends Ghosts {
 		//choose move
 		
 		//execute
+		move(dir);
 		}
 	}

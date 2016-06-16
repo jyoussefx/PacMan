@@ -6,17 +6,13 @@
 package pac.man.engine;
 
 import pac.man.entities.Blinky;
+import pac.man.entities.Clyde;
 import pac.man.entities.Entity;
-
-import pac.man.entities.Pellet;
-
 import pac.man.entities.Entity.Direction;
 import pac.man.entities.Inky;
 import pac.man.entities.PacMan;
-import pac.man.map.Map;
-import pac.man.map.Tile;
-import pac.man.map.TileID;
-
+import pac.man.entities.Pellet;
+import pac.man.entities.Pinky;
 import pac.man.states.Game;
 import pac.man.states.Menu;
 import pac.man.states.State;
@@ -33,11 +29,7 @@ public class GameHandler implements Playable{
 
     
     public static PacMan pac;
-    public static Blinky red;
-    public static Inky blue;
-    /*public static Pinky pink;
-    public static Clyde orange;
-    */
+    
 
     public static States state;
     
@@ -124,7 +116,7 @@ public class GameHandler implements Playable{
     }
     
     public static int[] getIndex(Entity entity){
-    	return entity.getMapLocation();
+    	return entity.getMapLocation(entity.dir);
     }
     
     public static Direction getDir(Entity entity){

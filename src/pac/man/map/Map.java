@@ -135,4 +135,14 @@ public class Map implements Playable{
         
         wasGrid = Keyboard.isKeyDown(Keyboard.KEY_G);
     }
+
+
+
+    /**
+     * @return
+     */
+    public int getWidth() {
+        // TODO Auto-generated method stub
+        return tiles[0].length;
+    }
 }
