@@ -9,6 +9,7 @@ import org.lwjgl.input.Keyboard;
 
 import pac.man.engine.Animation;
 import pac.man.engine.Draw;
+import pac.man.states.Game;
 
 /**
  * The main character, duh
@@ -20,7 +21,9 @@ import pac.man.engine.Draw;
 public class PacMan extends Entity{
     
     public Animation pac;
-	
+	private boolean up, down, left, right;
+    
+    
     public PacMan(int x, int y){
         super(x, y, 13, 13);
         pac = new Animation(4, 2, sx, sy, 1);
@@ -34,39 +37,41 @@ public class PacMan extends Entity{
     }
 
     public void getInput(){
-        if(Keyboard.isKeyDown(Keyboard.KEY_UP)&&
-                !(Keyboard.isKeyDown(Keyboard.KEY_DOWN) ||
-                        Keyboard.isKeyDown(Keyboard.KEY_LEFT) ||
-                        Keyboard.isKeyDown(Keyboard.KEY_RIGHT)))
+        up = Keyboard.isKeyDown(Keyboard.KEY_UP);
+        down = Keyboard.isKeyDown(Keyboard.KEY_DOWN);
+        left = Keyboard.isKeyDown(Keyboard.KEY_LEFT);
+        right = Keyboard.isKeyDown(Keyboard.KEY_RIGHT);
+        
+        if(up && !(down || left || right) && clearTop()){
             dir = Direction.UP;
-        if(Keyboard.isKeyDown(Keyboard.KEY_DOWN)&&
-                !(Keyboard.isKeyDown(Keyboard.KEY_UP) ||
-                        Keyboard.isKeyDown(Keyboard.KEY_LEFT) ||
-                        Keyboard.isKeyDown(Keyboard.KEY_RIGHT)))
+        }
+        if(down && !(up || left || right) && clearBottom()){
             dir = Direction.DOWN;
-        if(Keyboard.isKeyDown(Keyboard.KEY_LEFT)&&
-                !(Keyboard.isKeyDown(Keyboard.KEY_UP) ||
-                        Keyboard.isKeyDown(Keyboard.KEY_DOWN) ||
-                        Keyboard.isKeyDown(Keyboard.KEY_RIGHT)))
+        }
+        if(left && !(down || up || right) && clearLeft()){
             dir = Direction.LEFT;
-        if(Keyboard.isKeyDown(Keyboard.KEY_RIGHT)&&
-                !(Keyboard.isKeyDown(Keyboard.KEY_UP) ||
-                        Keyboard.isKeyDown(Keyboard.KEY_DOWN) ||
-                        Keyboard.isKeyDown(Keyboard.KEY_LEFT)))
+        }
+        if(right && !(down || left || up) && clearRight()){
             dir = Direction.RIGHT;
+        }
         
         
-        if(Keyboard.isKeyDown(Keyboard.KEY_L))
+        if(Keyboard.isKeyDown(Keyboard.KEY_L)){
             System.out.println("X: " + x+
                                "Y: "+  y);
+        }
+        if(Keyboard.isKeyDown(Keyboard.KEY_R)){
+            reset();
+        }
     }
     
     /* (non-Javadoc)
      * @see pac.man.entities.Entity#update()
      */
     @Override
-    public void update() {        
+    public void update() {
     	move(dir);
+//    	System.out.println(Game.realMap.getTileID(getMapLocation()[1], getMapLocation()[0]));
     }
 
     /* (non-Javadoc)
@@ -83,6 +88,7 @@ public class PacMan extends Entity{
         default:
             break;
         }
+        Draw.rect(ox, oy, 1, 1, 70, 5, 0, 1);
     }
     
     /**
@@ -94,7 +100,21 @@ public class PacMan extends Entity{
     {
     	
     }
-
+    
+    /**
+     * 
+     */
+    @Override
+    public void move(Direction dir){
+        super.move(dir);
+        if(dx == 0 && dy == 0){
+            stop();
+        }else{
+            play();
+        }
+        
+    }
+    
     /**
      * Stops PacMan's animation
      */
@@ -108,6 +128,10 @@ public class PacMan extends Entity{
     public void play() {
         pac.resume();
     }
-
     
+    public void reset(){
+        x=106;
+        y=68;
+    }
+        
 }

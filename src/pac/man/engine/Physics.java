@@ -27,11 +27,27 @@ public class Physics {
 		
 	}
 	
-   public static boolean checkWall(PacMan play, Map map)
-    {
+   /**
+    * Checks the walls and sees if Pac-Man can turn
+    * 
+    * @param play
+    * @param map
+    * @return
+    */
+   public static boolean checkWall(PacMan play, Map map){
+       int pacX = map.getX(play);
+       int pacY = map.getY(play);
+       switch (play.getDirection()) {
+       case UP:case DOWN:
+           break;
+       case RIGHT:case LEFT:
+           break;
+        default:
+            break;
+        }
        
        
-        
+       
         return false;
         
     }

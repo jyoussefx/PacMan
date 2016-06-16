@@ -5,6 +5,8 @@ package pac.man.entities;
 
 import pac.man.engine.GameHandler;
 import pac.man.engine.Renderable;
+import pac.man.map.TileID;
+import pac.man.states.Game;
 
 /**
  * Represents things that move or are on the screen
@@ -33,10 +35,10 @@ public abstract class Entity implements Renderable{
         this.y = y;
         this.sx = sx;
         this.sy = sy;
-        radius = sx/2;
+        radius = sx/2f;
         
-        ox = x+radius;
-        oy = y+radius;
+        ox = x+radius-1;
+        oy = y+radius-1;
     }
     
     
@@ -68,23 +70,34 @@ public abstract class Entity implements Renderable{
         float speed = 0;
         if(this instanceof PacMan)speed = pacSpeed;
         if(this instanceof Ghosts)speed = ghostSpeed;
+
+        dx = 0;
+        dy = 0;
         
-    	switch(dir){
+        switch(dir){
         case DOWN:
-            dy=-speed;
-            dx=  0;
+            if(clearBottom()){
+                dy=-speed;
+                dx=  0;
+            }
             break;
         case LEFT:
-            dx=-speed;
-            dy=0;
+            if(clearLeft()){
+                dx=-speed;
+                dy=0;
+            }
             break;
         case RIGHT:
-            dx=speed;
-            dy=0;
+            if(clearRight()){
+                dx=speed;
+                dy=0;
+            }
             break;
         case UP:
-            dy=speed;
-            dx=0;
+            if(clearTop()){
+                dy=speed;
+                dx=0;
+            }
             break;
         default:
             break;
@@ -103,54 +116,59 @@ public abstract class Entity implements Renderable{
     	move(dir);
     }
     
-    public boolean clearFront(){
-    	int[] index=new int[2];
-    	index=getMapLocation(x,y);
-    	if (GameHandler.map[index[0]][index[1]-1]==0){
-    		return true;
-    	}
+    public boolean clearTop(){
+        int[] index=getMapLocation();
+        System.out.println(Game.realMap.getTileID(index[1], index[0]));
+        if (Game.realMap.getTileID(index[1], index[0])==TileID.BLANK){
+            return true;
+        }
     	return false;
     }
     
-    public boolean clearRight(){
-    	int[] index=new int[2];
-    	index=getMapLocation(x,y);
-    	if (GameHandler.map[index[0]+1][index[1]]==0){
-    		return true;
-    	}
+    public boolean clearBottom(){
+        int[] index=getMapLocation();
+        System.out.println(Game.realMap.getTileID(index[1]-1, index[0]));
+        if (Game.realMap.getTileID(index[1]-1, index[0])==TileID.BLANK){
+            return true;
+        }
+        return false;
+    }
+
+    
+    public boolean clearRight() throws ArrayIndexOutOfBoundsException{
+        int[] index=getMapLocation();
+        System.out.println(Game.realMap.getTileID(index[1]-1, index[0]+1));
+        if (Game.realMap.getTileID(index[1]-1, index[0]+1)==TileID.BLANK){
+            return true;
+        }
     	return false;
     }
     
     public boolean clearLeft(){
-    	int[] index=new int[2];
-    	index=getMapLocation(x,y);
-    	if (GameHandler.map[index[0]-1][index[1]]==0){
+    	 int[] index=getMapLocation();
+         System.out.println(Game.realMap.getTileID(index[1]-1, index[0]-1));
+    	if (Game.realMap.getTileID(index[1]-1, index[0]-1)==TileID.BLANK){
     		return true;
     	}
     	return false;
     }
     
     
-    public float[] getLocation(float x,float y){
+    public float[] getLocation(){
   	  float[] location=new float[2];
-  	  location[0]=x;
-        location[1]=y;
+  	  location[0]=ox;
+        location[1]=oy;
   	  return location;
     }
     
-    public int[] getMapLocation(float x, float y){
-  	  int xIndex; 
-  	  int yIndex;
+    public int[] getMapLocation(){  
+  	  int xIndex=(int)(ox/8);
+  	  int yIndex=(int)(oy/8);
   	  
-  	  xIndex=(int)x/16;
-  	  yIndex=(int)y/16;
-  	  
-  	  int[]mapLocation=new int[2];
-  	  mapLocation[0]=xIndex;
-  	  mapLocation[1]=yIndex;
+  	  int[]mapLocation= {xIndex, yIndex-1};
   	  return mapLocation;
     }
-
+    
     /**
      * Returns the radius
      * 
@@ -166,6 +184,13 @@ public abstract class Entity implements Renderable{
 
     public float getOy() {
         return oy;
+    }
+
+    /**
+     * Returns the direction this entity is moving
+     */
+    public Direction getDirection(){
+        return dir;
     }
 
 

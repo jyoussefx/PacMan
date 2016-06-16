@@ -15,6 +15,8 @@ public class Tile {
     private TileID id; 
     
     int x, y;
+
+    private static boolean grid = false;
     
     public final static int SIZE = 8;
     
@@ -82,10 +84,22 @@ public class Tile {
           Draw.rect(x+SIZE, y+SIZE-4, SIZE, SIZE, texX, 0, 2, 1);
           break;
         }
+        if(grid){
+          Draw.rect(x, y, SIZE, SIZE, 80, 0, 1);
+        }
     }
     
     public void setType(TileID id){
       this.id = id;
     }
+    
+    public TileID getType(){
+        return id;
+    }
+    
+    public static void changeGrid(){
+        grid = !grid;
+    }
+
     
 }

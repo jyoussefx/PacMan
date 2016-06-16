@@ -11,7 +11,11 @@ import java.io.Reader;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 
+import org.lwjgl.input.Keyboard;
+
+import pac.man.engine.Playable;
 import pac.man.engine.Renderable;
+import pac.man.entities.Entity;
 
 
 /**
@@ -20,8 +24,9 @@ import pac.man.engine.Renderable;
  * @author Aaron Roy
  * @version 
  */
-public class Map implements Renderable{
+public class Map implements Playable{
     Tile[][] tiles;
+    private boolean wasGrid;
 
 
     /**
@@ -39,6 +44,8 @@ public class Map implements Renderable{
         }
     }
 
+    
+    
     public Map(String key){
         try {
             BufferedReader reader = new BufferedReader(new FileReader(
@@ -87,5 +94,41 @@ public class Map implements Renderable{
     public void update() {
         // TODO Auto-generated method stub
 
+    }
+    
+    
+    public int getX(Entity entity){
+        
+        return (int) entity.getOx()/8;
+    }
+
+    public int getY(Entity entity){
+        
+        return (int) entity.getOy()/8;
+    }
+    
+    /**
+     * Returns the type of the tile at the specified array location
+     * 
+     * @param col column index
+     * @param row row index
+     * @return type of the specified tile
+     */
+    public TileID getTileID(int row, int col){
+        return tiles[row][col].getType();
+    }
+
+
+
+    /* (non-Javadoc)
+     * @see pac.man.engine.Playable#getInput()
+     */
+    @Override
+    public void getInput() {
+        if(Keyboard.isKeyDown(Keyboard.KEY_G) && !wasGrid){
+            Tile.changeGrid();
+        }
+        
+        wasGrid = Keyboard.isKeyDown(Keyboard.KEY_G);
     }
 }

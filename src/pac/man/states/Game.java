@@ -43,7 +43,7 @@ public class Game extends State {
 	public Game()
 	{
 		super(States.GAME);
-        pac = new PacMan(106,69);
+        pac = new PacMan(106,68);
         
         test=new Tile(8*9, 8*9, TileID.CORNER_DR);
         
@@ -63,6 +63,7 @@ public class Game extends State {
 	@Override
 	public void getInput() {
 		if(!paused)pac.getInput();
+		realMap.getInput();
 		
 		if(Keyboard.isKeyDown(Keyboard.KEY_P) && !wasPaused){
 		    paused = !paused;
@@ -118,5 +119,8 @@ public class Game extends State {
 		return pac;
 	}
     
+	public static Map getTileMap(){
+        return realMap;
+    }
 	
 }
