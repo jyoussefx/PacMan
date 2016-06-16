@@ -88,4 +88,9 @@ public class Map implements Renderable{
         // TODO Auto-generated method stub
 
     }
+    
+    public Tile[][] getTiles()
+    {
+        return tiles;
+    }
 }

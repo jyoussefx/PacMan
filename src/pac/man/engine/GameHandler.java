@@ -43,6 +43,7 @@ public class GameHandler implements Playable{
     
     public static Game game;
     public static Menu menu;
+
     
     Pellet pellet;
     
@@ -124,6 +125,7 @@ public class GameHandler implements Playable{
         {
  		case GAME:
  			game.render();
+ 			TextHandler.render();
  			break;
  		case MENU:
  			menu.render();

@@ -28,8 +28,18 @@ public class BigPellet extends Pellet {
     
     @Override
     public void render() {
-    	if (!isEaten) Draw.rect(x, y, sx, sy, 58, 12, 60, 14, 0, 1);
+    	if (!isEaten) Draw.rect(x, y, sx, sy, 62, 12, 70, 20, 0, 1);
         
+    }
+    
+    public boolean isBig()
+    {
+        return true;
+    }
+    
+    public boolean isEaten()
+    {
+        return isEaten;
     }
 
 }

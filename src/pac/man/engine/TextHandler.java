@@ -251,6 +251,9 @@ public class TextHandler {
  		{
  			words.remove(index);
  			strings.remove(index);
+ 			topLeftX.remove(index);
+ 	        topLeftY.remove(index);
+ 	        fontSizes.remove(index);
  		}
  	}
  

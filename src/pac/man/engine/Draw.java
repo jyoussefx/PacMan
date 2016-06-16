@@ -35,7 +35,7 @@ import org.newdawn.slick.opengl.TextureLoader;
  */
 public class Draw {
     
-    private static Texture[] tex = new Texture[3];
+    private static Texture[] tex = new Texture[4];
     
     /**
      * Draws a sprite on the screen from the specified image, assumed the texsx
@@ -144,6 +144,7 @@ public class Draw {
      *     0 for Ms. Pac-Man<br>
      *     1 for Everything else<br>
      *     2 for Text
+     * 
      */
     public static void loadTextures() {
         try {

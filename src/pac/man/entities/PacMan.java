@@ -21,6 +21,9 @@ public class PacMan extends Entity{
     
     public Rectangle area;
     public Animation pac;
+    
+    public int score;
+    public int prevScore;
 	
     public PacMan(int x, int y){
         this.x = x;
@@ -35,6 +38,8 @@ public class PacMan extends Entity{
         pac.add(71, 21);
         
         this.area = new Rectangle(x, y, (int) sx, (int) sy);
+        
+        score=0;
        
     }
 
@@ -109,6 +114,20 @@ public class PacMan extends Entity{
     public void play() {
         pac.resume();
     }
+    
+    public float getX()
+    {
+        return x;
+    }
+    
+    public float getY()
+    {
+        return y;
+    }
 
+    public void setX(float i)
+    {
+        this.x = i;
+    }
     
 }

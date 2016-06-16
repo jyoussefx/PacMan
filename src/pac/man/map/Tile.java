@@ -4,6 +4,7 @@
 package pac.man.map;
 
 import pac.man.engine.Draw;
+import pac.man.entities.Pellet;
 
 /**
  * Represents a tile in the game
@@ -12,7 +13,7 @@ import pac.man.engine.Draw;
  * @version 
  */
 public class Tile {
-    private TileID id; 
+    private TileID id;
     
     int x, y;
     
@@ -22,6 +23,8 @@ public class Tile {
         this.id = id;
         this.x = x*SIZE;
         this.y = y*SIZE;
+        
+      
     }
     
     public void render(){
@@ -82,9 +85,25 @@ public class Tile {
           Draw.rect(x+SIZE, y+SIZE-4, SIZE, SIZE, texX, 0, 2, 1);
           break;
         }
+       
     }
     
     public void setType(TileID id){
       this.id = id;
+    }
+    
+    public TileID getID()
+    {
+        return id;
+    }
+    
+    public int getX()
+    {
+        return x;
+    }
+    
+    public int getY()
+    {
+        return y;
     }
 }

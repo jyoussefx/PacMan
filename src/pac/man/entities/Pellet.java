@@ -28,7 +28,7 @@ public class Pellet extends Entity {
 
 	@Override
 	public void render() {
-		if (!isEaten) Draw.rect(x, y, sx, sy, 58, 16, 60, 18, 0, 1);
+		if (!isEaten) Draw.rect(x, y, sx, sy, 58, 12, 60, 14, 0, 1);
 	}
 	
 	public void eat()
@@ -44,6 +44,10 @@ public class Pellet extends Entity {
 	public boolean isEaten()
 	{
 		return isEaten;
+	}
+	
+	public boolean isBig(){
+	    return false;
 	}
 
 }
