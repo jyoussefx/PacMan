@@ -62,12 +62,56 @@ public abstract class Ghosts extends Entity {
 		return false;
 	}
 	
-	public int[] calcChoice(int[] tile1, int[] tile2, int[] tile3, int[] target){
+	public int[] calcChoice(int[] target){
 		float distance1;
 		float distance2;
 		float distance3;
-		return target;
 		
+		int[] tile1;
+		int[] tile2;
+		int[] tile3;
+		/*
+		switch (dir) {
+        case UP:
+            tile1 = getMapLocation(x-8, y+8);   //left
+            tile2 = getMapLocation(x+8, y+8);   //right
+            tile3 = getMapLocation(x, y+16);    //up
+            break;
+        case DOWN:
+            tile1 = getMapLocation(x-8, y-8);   //left 
+            tile2 = getMapLocation(x+8, y-8);   //right
+            tile3 = getMapLocation(x, y-16);    //down   
+            break;
+        case LEFT:
+            tile1 = getMapLocation(x-8, y-8);   //down
+            tile2 = getMapLocation(x-8, y+8);   //up
+            tile3 = getMapLocation(x-16, y);    //left   
+            break;
+        case RIGHT:
+            tile1 = getMapLocation(x+8, y-8);   //down 
+            tile2 = getMapLocation(x+8, y+8);   //up
+            tile3 = getMapLocation(x+16, y);    //right
+            break;
+        default:
+            tile1 = getMapLocation(x, y);
+            tile2 = getMapLocation(x, y);
+            tile3 = getMapLocation(x, y);
+            break;
+        }
+		
+		distance1 = (float)Math.sqrt(Math.pow(tile1[0] - target[0], 2) + Math.pow(tile1[1] - target[1], 2));
+	    distance2 = (float)Math.sqrt(Math.pow(tile1[0] - target[0], 2) + Math.pow(tile1[1] - target[1], 2));
+	    distance3 = (float)Math.sqrt(Math.pow(tile1[0] - target[0], 2) + Math.pow(tile1[1] - target[1], 2));
+	    
+	    if(distance1 > distance2 && distance1 > distance3)
+	        return tile1;
+	    else if (distance2 > distance3) {
+            return tile2;
+        }
+		
+		return tile3;
+		*/
+		return new int[] {0,0};
 		
 	}
 	

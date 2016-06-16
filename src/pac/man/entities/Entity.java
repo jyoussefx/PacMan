@@ -46,7 +46,7 @@ public abstract class Entity implements Renderable{
         PACMAN, PELLET, BLINKY, INKY, PINKY, CLYDE, FRUIT;
     }
     
-    public enum Direction{UP, DOWN, LEFT, RIGHT;}
+    public enum Direction{UP, DOWN, LEFT, RIGHT, NONE;}
     
     public static Direction dir = Direction.LEFT;
     
@@ -181,21 +181,23 @@ public abstract class Entity implements Renderable{
       switch(newDir){
     case DOWN:
         x = ox;
-        y = oy+3;
+        y = oy+4;
         break;
     case LEFT:
-        x = ox+3;
+        x = ox+4;
         y = oy;
         break;
     case RIGHT:
-        x = ox-4;
+        x = ox-3;
         y = oy;
         break;
     case UP:
         x = ox;
-        y = oy-4;
+        y = oy-3;
         break;
     default:
+        x = ox;
+        y = oy;
         break;
           
       }
@@ -206,6 +208,15 @@ public abstract class Entity implements Renderable{
   	  int[]mapLocation= {xIndex, yIndex-1};
   	  return mapLocation;
     }
+    
+    public int[] getMapLocation(float x, float y){  
+        int xIndex=(int)(x/8);
+        int yIndex=(int)((y)/8);
+        
+        int[]mapLocation= {xIndex, yIndex-1};
+        return mapLocation;
+      }
+
     
     /**
      * Returns the radius
@@ -225,11 +236,11 @@ public abstract class Entity implements Renderable{
     }
     
     public int getCenterX(){
-        return ((int)ox/8)*8+4;
+        return ((int)ox/8)*8+3;
     }
     
     public int getCenterY(){
-        return ((int)oy/8)*8+4;
+        return ((int)oy/8)*8+3;
     }
 
 

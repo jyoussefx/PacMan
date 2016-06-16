@@ -141,7 +141,7 @@ public class PacMan extends Entity{
     
     public void reset(){
         x=106;
-        y=71;
+        y=70;
         ox = x+radius-1;
         oy = y+radius-1;
     }

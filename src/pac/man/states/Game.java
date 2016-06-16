@@ -69,7 +69,7 @@ public class Game extends State {
 	    
 		super(States.GAME);
         hud = new HUD(pac);
-        pac = new PacMan(106,71);
+        pac = new PacMan(106,70);
                
         realMap = new Map("res/Maze");
         
@@ -131,7 +131,7 @@ public class Game extends State {
 	        for (Pellet p: pellets)
 	        {
 	            
-	            if (Physics.checkPlayer(pac, p) && !p.isEaten()){
+	            if (Physics.checkPlayer2(pac, p) && !p.isEaten()){
 	                p.eat();
 	                pac.setEating(true);
 	                pac.prevScore = pac.score;
@@ -169,7 +169,7 @@ public class Game extends State {
 	        
 	        if (fruitTimer<=0 && !hasFruit) spawnFruit();
 	        
-	        if (hasFruit && Physics.checkPlayer(pac, fruit) &!fruit.isEaten()) 
+	        if (hasFruit && Physics.checkPlayer2(pac, fruit) &!fruit.isEaten()) 
 	            {
 	                fruit.eat();
 	                pac.prevScore=pac.score;
@@ -218,7 +218,6 @@ public class Game extends State {
 	@Override
 	public void render() {
 		
-		pac.render();
 //		red.render();
         realMap.render();
         for (Pellet p: pellets) p.render();
@@ -231,7 +230,7 @@ public class Game extends State {
 //        test.render();
         
         if (hasFruit) fruit.render();
-	
+        pac.render();
 		
 	}
 	
