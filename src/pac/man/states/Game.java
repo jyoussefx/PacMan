@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import org.lwjgl.input.Keyboard;
 import org.w3c.dom.css.Counter;
 
+import pac.man.engine.AudioHandler;
 import pac.man.engine.HUD;
 import pac.man.engine.NonexistentStringException;
 import pac.man.engine.Physics;
@@ -95,6 +96,8 @@ public class Game extends State {
             }
         }
         
+        AudioHandler.init();
+        
         numLives=2;
         fruitNum=0;
         fruitTimer=100;
@@ -125,7 +128,7 @@ public class Game extends State {
 	@Override
 	public void update() {
 	    if(!paused && counter>240){
-	        
+	        AudioHandler.playMusic();
 	        if (hasFruit) fruit.update();
 
 	        for (Pellet p: pellets)

@@ -31,7 +31,7 @@ import org.lwjgl.openal.AL;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 
-//import org.newdawn.slick.openal.SoundStore;
+import org.newdawn.slick.openal.SoundStore;
 
 /**
  * Initializes stuff
@@ -133,7 +133,7 @@ public class Main {
             getInput();
             update();
             render();
-//            SoundStore.get().poll(0);
+            SoundStore.get().poll(0);
             
             //if (Keyboard.isKeyDown(Keyboard.KEY_0)) gamehandler.switchStates(States.MENU);
             
