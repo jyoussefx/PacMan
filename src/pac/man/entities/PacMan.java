@@ -9,6 +9,7 @@ import org.lwjgl.input.Keyboard;
 
 import pac.man.engine.Animation;
 import pac.man.engine.Draw;
+import pac.man.states.Game;
 
 /**
  * The main character, duh
@@ -19,60 +20,66 @@ import pac.man.engine.Draw;
  */
 public class PacMan extends Entity{
     
-    public Rectangle area;
     public Animation pac;
     
     public int score;
     public int prevScore;
 	
+	private boolean up, down, left, right;
+	private boolean isEating;
+    
+    
     public PacMan(int x, int y){
-        this.x = x;
-        this.y = y;
-        sx = 13;
-        sy = 13;
+        super(x, y, 13, 13);
         pac = new Animation(4, 2, sx, sy, 1);
         
         pac.add(58, 21);
         pac.add(71, 21);
         pac.add(84, 21);
         pac.add(71, 21);
+        pac.stop();
         
-        this.area = new Rectangle(x, y, (int) sx, (int) sy);
         
         score=0;
        
     }
 
     public void getInput(){
-        if(Keyboard.isKeyDown(Keyboard.KEY_UP)&&
-                !(Keyboard.isKeyDown(Keyboard.KEY_DOWN) ||
-                        Keyboard.isKeyDown(Keyboard.KEY_LEFT) ||
-                        Keyboard.isKeyDown(Keyboard.KEY_RIGHT)))
+        up = Keyboard.isKeyDown(Keyboard.KEY_UP);
+        down = Keyboard.isKeyDown(Keyboard.KEY_DOWN);
+        left = Keyboard.isKeyDown(Keyboard.KEY_LEFT);
+        right = Keyboard.isKeyDown(Keyboard.KEY_RIGHT);
+        
+        if(up && !(down || left || right) && clearTop()){
             dir = Direction.UP;
-        if(Keyboard.isKeyDown(Keyboard.KEY_DOWN)&&
-                !(Keyboard.isKeyDown(Keyboard.KEY_UP) ||
-                        Keyboard.isKeyDown(Keyboard.KEY_LEFT) ||
-                        Keyboard.isKeyDown(Keyboard.KEY_RIGHT)))
+        }
+        if(down && !(up || left || right) && clearBottom()){
             dir = Direction.DOWN;
-        if(Keyboard.isKeyDown(Keyboard.KEY_LEFT)&&
-                !(Keyboard.isKeyDown(Keyboard.KEY_UP) ||
-                        Keyboard.isKeyDown(Keyboard.KEY_DOWN) ||
-                        Keyboard.isKeyDown(Keyboard.KEY_RIGHT)))
+        }
+        if(left && !(down || up || right) && clearLeft()){
             dir = Direction.LEFT;
-        if(Keyboard.isKeyDown(Keyboard.KEY_RIGHT)&&
-                !(Keyboard.isKeyDown(Keyboard.KEY_UP) ||
-                        Keyboard.isKeyDown(Keyboard.KEY_DOWN) ||
-                        Keyboard.isKeyDown(Keyboard.KEY_LEFT)))
+        }
+        if(right && !(down || left || up) && clearRight()){
             dir = Direction.RIGHT;
+        }
+        
+        
+        if(Keyboard.isKeyDown(Keyboard.KEY_L)){
+            System.out.println("X: " + x+
+                               "Y: "+  y);
+        }
+        if(Keyboard.isKeyDown(Keyboard.KEY_R)){
+            reset();
+        }
     }
     
     /* (non-Javadoc)
      * @see pac.man.entities.Entity#update()
      */
     @Override
-    public void update() {        
-    	move(dir);
-    	area.setLocation((int) x, (int) y); 
+    public void update() {
+    	if(!isEating)move(dir);
+//    	System.out.println(Game.realMap.getTileID(getMapLocation()[1], getMapLocation()[0]));
     }
 
     /* (non-Javadoc)
@@ -100,7 +107,23 @@ public class PacMan extends Entity{
     {
     	
     }
-
+    
+    /**
+     * 
+     */
+    @Override
+    public void move(Direction dir){
+        super.move(dir);
+        if(dx == 0 && dy == 0){
+            stop();
+        }else{
+            play();
+        }
+        if (x<-13) setX(x+237);
+        if (x>224) setX(x-237);
+        
+    }
+    
     /**
      * Stops PacMan's animation
      */
@@ -115,19 +138,21 @@ public class PacMan extends Entity{
         pac.resume();
     }
     
-    public float getX()
-    {
-        return x;
+    
+    public void reset(){
+        x=106;
+        y=70;
+        ox = x+radius-1;
+        oy = y+radius-1;
     }
     
-    public float getY()
-    {
-        return y;
+    public boolean isEating(){
+        return isEating;
+    }
+    
+    public void  setEating(boolean e){
+        isEating = e;
     }
 
-    public void setX(float i)
-    {
-        this.x = i;
-    }
-    
+        
 }

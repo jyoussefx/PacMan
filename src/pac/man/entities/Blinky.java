@@ -5,6 +5,7 @@ package pac.man.entities;
 
 import pac.man.engine.Draw;
 import pac.man.engine.GameHandler;
+import pac.man.states.Game;
 
 /**
  * The red ghost, follows Pac-Man like a bee after honey
@@ -15,22 +16,14 @@ import pac.man.engine.GameHandler;
 public class Blinky extends Ghosts{
 	
 	public Blinky(int x, int y){
-		this.x = x;
-        this.y = y;
-        sx = 14;
-        sy = 14;
-	}
-
-	@Override
-	public void render() {
-		Draw.rect(x, y, sx, sy, 0, 0, 16, 16, 0);
+	    super(x, y);
 	}
 
 	@Override
 	public void update() {
 		//pull pacman location
 		float[] pacLoc=new float[2];
-		pacLoc=GameHandler.getLoc(GameHandler.pac);
+		pacLoc=GameHandler.getLoc(Game.pac);
 		
 		float pacX=pacLoc[0];
 		float pacY=pacLoc[1];
@@ -46,9 +39,9 @@ public class Blinky extends Ghosts{
 				
 			}
 		}else{
-	        move(dir);
+	        
 		}
-		
+		move(dir);
 		//choose move
 		
 		//execute

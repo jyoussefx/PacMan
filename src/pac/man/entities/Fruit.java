@@ -1,10 +1,11 @@
-package pac.man.states;
+package pac.man.entities;
 
 import java.awt.Rectangle;
 
 import pac.man.engine.Draw;
 import pac.man.entities.Entity;
 import pac.man.entities.Fruits;
+import pac.man.states.Game;
 
 public class Fruit extends Entity{
 
@@ -16,13 +17,10 @@ public class Fruit extends Entity{
     Fruits type;
     public Fruit(Fruits type, float x, float y)
     {
+        super(x, y, Fruit.getSx(type), Fruit.getSy(type));
         this.type = type;
-        this.x = x;
-        this.y = y;
-        
-        this.area = new Rectangle((int) x, (int) y, Fruit.getSx(type), Fruit.getSy(type));
-        
-        counter = 100;
+                
+        counter = (int)Math.random()*60+540;
     }
     @Override
     public void update() {
@@ -31,13 +29,11 @@ public class Fruit extends Entity{
             isEaten=true;
             Game.removeFruit();
         }
-        
-        System.out.println(counter);
-        
+                
     }
     @Override
     public void render() {
-        if (!isEaten) Draw.rect(x, y, Fruit.getSx(type), Fruit.getSy(type), Fruit.getTexX(type), Fruit.getTexY(type), Fruit.getTexX(type) + (Fruit.getSx(type)*3), Fruit.getTexY(type) + (Fruit.getSy(type)*3), 1);
+        if (!isEaten) Draw.rect(x, y, Fruit.getSx(type), Fruit.getSy(type), Fruit.getTexX(type), Fruit.getTexY(type), Fruit.getTexX(type) + (Fruit.getSx(type)), Fruit.getTexY(type) + (Fruit.getSy(type)), 1);
         
     }
     
@@ -46,13 +42,13 @@ public class Fruit extends Entity{
         switch (fruit)
         {
         case CHERRY: return 0;
-        case STRAWBERRY: return 45;
-        case ORANGE: return 88;
-        case APPLE: return 131;
-        case MELON: return 179;
-        case GALAXIAN_BOSS: return 222;
-        case BELL: return 261;
-        case KEY: return 306;
+        case STRAWBERRY: return 12;
+        case ORANGE: return 24;
+        case APPLE: return 36;
+        case MELON: return 48;
+        case GALAXIAN_BOSS: return 60;
+        case BELL: return 72;
+        case KEY: return 84;
         default: return 0;
         
         }
@@ -60,10 +56,7 @@ public class Fruit extends Entity{
     
     public static int getTexY(Fruits fruit)
     {
-        if (fruit==Fruits.MELON) return 101;
-        if (fruit==Fruits.KEY) return 102;
-        if (fruit==Fruits.GALAXIAN_BOSS) return 110;
-        return 102;
+        return 96;
     }
     
     public static int getSx(Fruits fruit)
@@ -76,9 +69,9 @@ public class Fruit extends Entity{
     
     public static int getSy(Fruits fruit)
     {
-        if (fruit==Fruits.MELON) return 13;
-        if (fruit==Fruits.KEY) return 15;
-        if (fruit==Fruits.GALAXIAN_BOSS) return 10;
+        if (fruit==Fruits.MELON) return 12;
+        if (fruit==Fruits.KEY) return 14;
+        if (fruit==Fruits.GALAXIAN_BOSS) return 9;
         return 12;
     }
     
@@ -101,7 +94,6 @@ public class Fruit extends Entity{
     public void eat()
     {
         if (!isEaten) isEaten = true;
-        System.out.println(isEaten);
     }
     
     public boolean isEaten()

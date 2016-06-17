@@ -17,8 +17,7 @@ import pac.man.entities.Entity.Direction;
 public class Pinky extends Ghosts{
 
 	public Pinky(int x, int y){
-		this.x = x;
-        this.y = y;
+	    super(x, y);
 	}
 
 	@Override
@@ -45,7 +44,7 @@ public class Pinky extends Ghosts{
 		else if (PacMan.dir == Direction.DOWN)
 			pinkyTargetY = pacY -4;
 
-
+		move(dir);
 	}
 
 	@Override
